@@ -3,8 +3,6 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaRegEnvelope } from "react-icons/fa";
-import { MdLockOutline } from "react-icons/md";
 import { CiLock, CiUser } from "react-icons/ci";
 
 export default function LoginPage() {
@@ -48,6 +46,7 @@ export default function LoginPage() {
               </p>
               <div className="flex flex-col items-center">
                 <div className="bg-gray-100 w-full max-w-xs p-2 flex items-center mb-3">
+                  <CiUser className="text-gray-400 m-2" />
                   <input
                     className="bg-gray-100 outline-none text-sm flex-1 p-2"
                     type="email"
@@ -55,6 +54,7 @@ export default function LoginPage() {
                   />
                 </div>
                 <div className="bg-gray-100 w-full max-w-xs p-2 flex items-center mb-3">
+                  <CiLock className="text-gray-400 m-2" />
                   <input
                     className="bg-gray-100 outline-none text-sm flex-1 p-2"
                     type="password"
@@ -70,7 +70,6 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
-          {/* Sección Informativa */}
           <div className="md:w-2/5 w-full bg-blue-500 text-white rounded-tr-2xl md:rounded-br-2xl rounded-bl-2xl md:rounded-bl-none py-20 px-12 flex flex-col items-center">
             <h2 className="text-3xl font-bold mb-2">Sanitos SV</h2>
             <div className="border-2 w-10 border-white inline-block mb-3"></div>
