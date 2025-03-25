@@ -1,0 +1,92 @@
+"use client";
+
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FaRegEnvelope } from "react-icons/fa";
+import { MdLockOutline } from "react-icons/md";
+import { CiLock, CiUser } from "react-icons/ci";
+
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      setError("Invalid credentials");
+    } else {
+      router.push("/");
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100 px-4">
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-4 text-center">
+        <div className="bg-white rounded-2xl shadow-2xl flex md:w-2/3 sm:w-full max-w-4xl flex-col md:flex-row">
+          {/* Formulario de Inicio de Sesión */}
+          <div className="md:w-3/5 w-full p-5">
+            <div className="text-left font-bold">
+              Sanitos <span className="text-blue-500">SV</span>
+            </div>
+            <div className="py-10">
+              <h2 className="text-3xl font-bold text-blue-500 mb-2">
+                Iniciar Sesión
+              </h2>
+              <div className="border-2 border-blue-500 w-10 inline-block mb-3"></div>
+              <p className="text-gray-400 my-3">
+                Utiliza tu usuario y contraseña para acceder a tu cuenta.
+              </p>
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-100 w-full max-w-xs p-2 flex items-center mb-3">
+                  <input
+                    className="bg-gray-100 outline-none text-sm flex-1 p-2"
+                    type="email"
+                    placeholder="Usuario"
+                  />
+                </div>
+                <div className="bg-gray-100 w-full max-w-xs p-2 flex items-center mb-3">
+                  <input
+                    className="bg-gray-100 outline-none text-sm flex-1 p-2"
+                    type="password"
+                    placeholder="Contraseña"
+                  />
+                </div>
+                <a
+                  className="mt-3 border-2 border-blue-500 text-blue-500 rounded-full px-8 py-2 inline-block font-semibold hover:bg-blue-500 hover:text-white transition duration-300"
+                  href=""
+                >
+                  Iniciar Sesión
+                </a>
+              </div>
+            </div>
+          </div>
+          {/* Sección Informativa */}
+          <div className="md:w-2/5 w-full bg-blue-500 text-white rounded-tr-2xl md:rounded-br-2xl rounded-bl-2xl md:rounded-bl-none py-20 px-12 flex flex-col items-center">
+            <h2 className="text-3xl font-bold mb-2">Sanitos SV</h2>
+            <div className="border-2 w-10 border-white inline-block mb-3"></div>
+            <p className="mb-10 text-center">
+              <span className="font-bold italic">Eficiencia y Eficacia</span> a
+              un clic de distancia.
+            </p>
+            <a
+              className="border-2 border-white rounded-full px-5 py-2 inline-block font-semibold hover:bg-white hover:text-blue-500 transition duration-300"
+              href=""
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
