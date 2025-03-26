@@ -1,12 +1,8 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { BsChevronBarLeft, BsChevronBarRight } from "react-icons/bs";
-import { IoMdMore } from "react-icons/io";
 import { createContext } from "react";
 import { useSession } from "next-auth/react";
-import Logo from "@/assets/images/logo.png";
-import Image from "next/image";
 
 const SidebarContext = createContext();
 
@@ -16,30 +12,19 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+      <nav className="h-full flex flex-col bg-blue-500 shadow-sm transtion-all duration-300">
         <div className="p-4 pb-2 flex justify-center items-center">
-          <Image
-            className={`overflow-hidden transtion-all duration-200 rounded-full ${
-              expanded ? "w-24" : "w-0"
-            }`}
-            src={Logo}
+          {/* <img
+            className={`overflow-hidden my-3 ${expanded ? "w-32" : "w-0"}`}
+            src="https://img.logoipsum.com/297.svg"
             alt="Logo"
-          />
-          {/* <button
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
-            onClick={() => setExpanded((current) => !current)}
-          >
-            {expanded ? (
-              <BsChevronBarRight className="text-xl" />
-            ) : (
-              <BsChevronBarLeft className="text-xl" />
-            )}
-          </button> */}
+          /> */}
+          <h3 className="text-white text-md font-semibold py-3">sanitos sv</h3>
         </div>
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1">{children}</ul>
         </SidebarContext.Provider>
-        <div className="border-t flex p-3">
+        <div className="bg-blue-950 flex p-3">
           <img
             className="w-10 h-10 rounded-md"
             src={`https://ui-avatars.com/api/?name=${session?.user?.name}&background=random&color=3730a3&bold=true`}
@@ -51,12 +36,13 @@ export default function Sidebar({ children }) {
             }`}
           >
             <div>
-              <h4 className="font-semibold"> {session?.user?.name}⚕️ </h4>
-              <span className="text-xs text-gray-500">
+              <h4 className="font-semibold text-white">
+                {session?.user?.name}⚕️
+              </h4>
+              <span className="text-xs text-slate-300">
                 {session?.user?.email}
               </span>
             </div>
-            {/* <IoMdMore size={20} /> */}
           </div>
         </div>
       </nav>
@@ -70,32 +56,55 @@ export function SidebarItem({
   active,
   link,
   alert,
+  children,
+  onClick,
 }: {
   icon: React.ReactNode;
   text: string;
   active?: boolean;
   link?: string;
   alert?: boolean;
+  children?: React.ReactNode;
+  onClick?: () => void;
 }) {
   const { expanded } = useContext(SidebarContext);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <li
-      className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors ${
+      className={`relative flex flex-col items-start py-2 px-3 my-1 rounded-md cursor-pointer transition-colors ${
         active
-          ? "bg-gradient-to-r from-blue-400 to-blue-200 text-blue-800"
-          : "hover:bg-indigo-50 text-gray-800"
+          ? "bg-gradient-to-r from-blue-400 to-blue-200"
+          : "hover:bg-blue-50 text-white hover:text-blue-600"
       } `}
+      onClick={onClick}
     >
-      <a className="flex p-1" href={link}>
-        {icon}
-        <span
-          className={`overflow-hidden transition-all ${
-            expanded ? "w-32 ml-3" : "w-0 h-0"
-          }`}
-        >
-          {text}
-        </span>
-      </a>
+      <div className="flex items-center w-full">
+        {link ? (
+          <a className="flex p-1 w-full" href={link}>
+            {icon}
+            <span
+              className={`overflow-hidden transition-all font-normal ${
+                expanded ? "w-32 ml-3" : "w-0 h-0"
+              }`}
+            >
+              {text}
+            </span>
+          </a>
+        ) : (
+          <div className="flex p-1 w-full">
+            {icon}
+            <span
+              className={`overflow-hidden transition-all font-normal ${
+                expanded ? "w-32 ml-3" : "w-0 h-0"
+              }`}
+            >
+              {text}
+            </span>
+          </div>
+        )}
+      </div>
+      {isOpen && children}
       {alert && (
         <div
           className={`absolute right-2/4 w-2 h-2 rounded bg-blue-400 ${
@@ -103,19 +112,26 @@ export function SidebarItem({
           }`}
         ></div>
       )}
+    </li>
+  );
+}
 
-      {!expanded && (
-        <div
-          className={`
-          absolute left-full rounded-md px-2 py-1 ml-6
-          bg-blue-100 text-blue-800 text-sm
-          invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-      `}
-        >
-          {text}
-        </div>
-      )}
+export function SidebarSubmenu({ children }: { children: React.ReactNode }) {
+  return <ul className="pl-8 mt-2 space-y-2">{children}</ul>;
+}
+
+export function SidebarSubmenuItem({
+  text,
+  link,
+}: {
+  text: string;
+  link: string;
+}) {
+  return (
+    <li className="relative flex items-center py-2 px-3 rounded-md cursor-pointer hover:bg-blue-100 hover:text-blue-600">
+      <a className="flex p-1 w-full" href={link}>
+        {text}
+      </a>
     </li>
   );
 }
