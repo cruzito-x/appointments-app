@@ -11,17 +11,17 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const login = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const login = async (event: React.FormEvent) => {
+    event.preventDefault();
     setError("");
 
-    const res = await signIn("credentials", {
+    const response = await signIn("credentials", {
       redirect: false,
       email,
       password,
     });
 
-    if (res?.error) {
+    if (response?.error) {
       setError("Credenciales incorrectas");
     } else {
       router.push("/dashboard");
