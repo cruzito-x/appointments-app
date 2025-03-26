@@ -34,3 +34,73 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+```
+appointments-management-app
+├─ next.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20250325180020_init
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  └─ schema.prisma
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ api
+│  │  ├─ dashboard
+│  │  │  └─ page.tsx
+│  │  ├─ globals.css
+│  │  ├─ layout.tsx
+│  │  ├─ login
+│  │  │  └─ page.tsx
+│  │  └─ page.tsx
+│  ├─ assets
+│  │  └─ images
+│  │     └─ logo.webp
+│  └─ lib
+│     └─ prisma.js
+├─ tailwind.config.ts
+└─ tsconfig.json
+
+```
+
+```
+appointments-management-app
+├─ next.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20250325180020_init
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  └─ schema.prisma
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ api
+│  │  │  └─ auth
+│  │  │     └─ login
+│  │  │        └─ [...nextauth]
+│  │  │           └─ route.ts
+│  │  ├─ dashboard
+│  │  │  └─ page.tsx
+│  │  ├─ globals.css
+│  │  ├─ layout.tsx
+│  │  ├─ login
+│  │  │  └─ page.tsx
+│  │  └─ page.tsx
+│  ├─ assets
+│  │  └─ images
+│  │     └─ logo.webp
+│  └─ lib
+│     └─ prisma.ts
+├─ tailwind.config.ts
+└─ tsconfig.json
+
+```

@@ -1,21 +1,19 @@
+// src/app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: "Email", type: "email", required: true },
+        password: { label: "Password", type: "password", required: true },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing email or password");
+          throw new Error("Faltan credenciales");
         }
 
         const user = await prisma.user.findUnique({
@@ -23,26 +21,18 @@ export const authOptions = {
         });
 
         if (!user) {
-          throw new Error("User not found");
+          throw new Error("Usuario no encontrado");
         }
 
-        const isValidPassword = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isValidPassword) {
-          throw new Error("Invalid credentials");
+        if (user.password !== credentials.password) {
+          throw new Error("Contraseña incorrecta");
         }
 
-        return { id: user.id, name: user.name, email: user.email };
+        return { id: `${user.id}`, name: user.name, email: user.email };
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt",
-  },
+  pages: { signIn: "/login" },
 };
 
 const handler = NextAuth(authOptions);
