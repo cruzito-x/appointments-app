@@ -12,11 +12,12 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Items />
-      <div className="w-full sticky top-0">
+
+      <div className="flex flex-col w-full">
         <Header />
-        <div>{children}</div>
+        <div className="flex-grow overflow-y-auto">{children}</div>
       </div>
     </div>
   );
