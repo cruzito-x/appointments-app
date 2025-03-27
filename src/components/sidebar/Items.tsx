@@ -23,6 +23,7 @@ export default function ClientSidebar() {
           icon={<CiGrid42 size={22} />}
           text="Dashboard"
           link="/dashboard"
+          active
         />
         <SidebarItem
           icon={<CiCalendar size={22} />}

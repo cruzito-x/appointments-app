@@ -1,11 +1,20 @@
 "use client";
 
 import Loading from "@/components/loading/Loading";
+import Table from "@/components/table/Table";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import DataTable from "react-data-table-component";
-import { CiBookmark, CiCalendar, CiWarning } from "react-icons/ci";
+import {
+  CiBookmark,
+  CiCalendar,
+  CiFlag1,
+  CiMedicalCross,
+  CiMenuKebab,
+  CiStar,
+  CiWarning,
+  CiWavePulse1,
+} from "react-icons/ci";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -26,20 +35,24 @@ export default function Dashboard() {
       name: "Nombre",
       selector: (row: any) => row.name,
       sortable: true,
+      center: true,
     },
     {
       name: "Teléfono",
       selector: (row: any) => row.phone,
+      center: true,
     },
     {
       name: "Cita",
       selector: (row: any) => row.appointment,
       sortable: true,
+      center: true,
     },
     {
       name: "Especialidad",
       selector: (row: any) => row.specialty,
       sortable: true,
+      center: true,
     },
   ];
 
@@ -124,8 +137,8 @@ export default function Dashboard() {
   ];
 
   return (
-    <>
-      <div className="p-3.5 overflow-y-auto">
+    <div className="flex">
+      <div className="w-3/4 p-3.5 overflow-y-auto">
         <div className="text-left mb-3 ml-0.5">
           <h2 className="text-lg font-semibold text-gray-900">Citas</h2>
           <p className="text-sm text-gray-500">
@@ -188,21 +201,97 @@ export default function Dashboard() {
             Administra la información de tus pacientes.
           </p>
         </div>
-        <div className="bg-white rounded-lg p-2 shadow-xl">
-          <DataTable
-            columns={columns}
-            data={patientsData}
-            pagination
-            paginationPerPage={10}
-            paginationComponentOptions={{
-              rowsPerPageText: "",
-              rangeSeparatorText: "de",
-            }}
-            fixedHeader
-            progressComponent={<Loading />}
-          />
+        <div className="bg-white rounded-xl p-0.5 shadow-xl">
+          <Table columns={columns} data={patientsData} />
         </div>
       </div>
-    </>
+      <div className="w-1/4 p-3.5">
+        <div className="h-screen text-2xl">
+          <div className="block w-full p-6 my-5 text-blue-900 bg-white border border-slate-200 shadow-xl rounded-xl cursor-pointer">
+            <div className="flex items-center">
+              <CiWavePulse1 size={21} color="#1e3a8a" />
+              <h2 className="text-sm font-semibold ml-1">Actividad</h2>
+            </div>
+            <label className="text-normal text-sm font-semibold">
+              Últimos 7 días
+            </label>
+
+            <hr className="my-6 border-1 border-slate-400" />
+            <div className="flex items-center">
+              <CiMedicalCross size={21} color="#1e3a8a" />
+              <h2 className="text-sm font-semibold ml-1">Top 5 Doctores</h2>
+            </div>
+            <label className="text-normal text-sm font-semibold">
+              Últimos 7 días
+            </label>
+          </div>
+
+          <div className="block w-full h-auto p-6 my-5 bg-white text-blue-900 border-slate-200 shadow-xl rounded-xl cursor-pointer">
+            <div className="flex items-center">
+              <CiStar size={21} color="#1e3a8a" />
+              <h2 className="text-sm font-semibold ml-1">Recordatorios</h2>
+              <span className="text-normal text-sm font-semibold ml-28">
+                <button className="text-xs font-medium me-2 px-2.5 py-0.5 rounded-full bg-blue-900 hover:bg-blue-700 text-white">
+                  Añadir nuevo
+                </button>
+              </span>
+            </div>
+            <div className="space-y-4 mt-3">
+              <div className="items-center p-4 bg-white border rounded-lg shadow-md">
+                <div className="flex items-center justify-between space-x-2">
+                  <span className="text-xl font-bold text-blue-700">
+                    08:30 AM
+                  </span>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                    <span className="text-sm font-bold ml-2 text-black">
+                      Alta
+                    </span>
+                  </div>
+                </div>
+                <p className="ml-auto text-sm font-normal text-gray-600">
+                  Ordenar expedientes de los pacientes del Dr. Gómez en orden
+                  alfabético.
+                </p>
+              </div>
+
+              <div className="items-center p-4 bg-white border rounded-lg shadow-md">
+                <div className="flex items-center justify-between space-x-2">
+                  <span className="text-xl font-bold text-blue-700">
+                    09:20 AM
+                  </span>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                    <span className="text-sm font-bold ml-2 text-black">
+                      Media
+                    </span>
+                  </div>
+                </div>
+                <p className="ml-auto mt-1 text-sm font-normal text-gray-600">
+                  Recibir Paquete del Dr. Mendoza.
+                </p>
+              </div>
+
+              <div className="items-center p-4 bg-white border rounded-lg shadow-md">
+                <div className="flex items-center justify-between space-x-2">
+                  <span className="text-xl font-bold text-blue-700">
+                    11:50 AM
+                  </span>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                    <span className="text-sm font-bold ml-2 text-black">
+                      Baja
+                    </span>
+                  </div>
+                </div>
+                <p className="ml-auto mt-1 text-sm font-normal text-gray-600">
+                  Agendar cita del Dr. Martinez con el Dr. Medina.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

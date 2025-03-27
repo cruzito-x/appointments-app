@@ -61,10 +61,15 @@ export default function Sidebar({ children }) {
   );
 }
 
-export function SidebarItem({ icon, text, link, onClick }) {
+export function SidebarItem({ icon, text, link, active, onClick }) {
   const { expanded } = useContext(SidebarContext);
+
   return (
-    <li className="flex items-center p-4 my-1 hover:bg-blue-500 rounded cursor-pointer">
+    <li
+      className={`flex items-center p-4 my-1 hover:bg-blue-500 ${
+        active ? "bg-blue-500" : ""
+      } rounded cursor-pointer`}
+    >
       {link ? (
         <Link href={link} className="flex items-center w-full">
           {icon}

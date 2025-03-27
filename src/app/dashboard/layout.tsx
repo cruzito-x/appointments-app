@@ -16,7 +16,7 @@ export default function DashboardLayout({
       <Items />
       <div className="w-full sticky top-0">
         <Header />
-        <div className="w-3/4">{children}</div>
+        <div>{children}</div>
       </div>
     </div>
   );
