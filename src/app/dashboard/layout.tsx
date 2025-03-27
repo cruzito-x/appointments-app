@@ -1,3 +1,4 @@
+import Header from "@/components/header/Header";
 import Items from "@/components/sidebar/Items";
 
 export const metadata = {
@@ -13,7 +14,10 @@ export default function DashboardLayout({
   return (
     <div className="flex">
       <Items />
-      <div className="w-3/5">{children}</div>
+      <div className="w-full sticky top-0">
+        <Header />
+        <div className="w-3/4">{children}</div>
+      </div>
     </div>
   );
 }

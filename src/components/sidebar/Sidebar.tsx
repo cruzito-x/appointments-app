@@ -3,14 +3,6 @@
 import { useContext, useState, createContext } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import {
-  FiHome,
-  FiUsers,
-  FiShoppingBag,
-  FiMessageSquare,
-  FiSettings,
-  FiLogOut,
-} from "react-icons/fi";
 import { CiMaximize1, CiMinimize1 } from "react-icons/ci";
 
 const SidebarContext = createContext();
@@ -53,7 +45,7 @@ export default function Sidebar({ children }) {
       >
         <img
           className="w-10 h-10 rounded-md cursor-pointer "
-          src={`https://ui-avatars.com/api/?name=${session?.user?.name}&background=random&color=fff&bold=true`}
+          src={`https://ui-avatars.com/api/?name=${session?.user?.name}&background=3b82f6&color=ffffff&bold=true`}
           alt="User Avatar"
         />
         {expanded && (
@@ -72,7 +64,7 @@ export default function Sidebar({ children }) {
 export function SidebarItem({ icon, text, link, onClick }) {
   const { expanded } = useContext(SidebarContext);
   return (
-    <li className="flex items-center p-4 my-1 hover:bg-blue-900 rounded cursor-pointer">
+    <li className="flex items-center p-4 my-1 hover:bg-blue-500 rounded cursor-pointer">
       {link ? (
         <Link href={link} className="flex items-center w-full">
           {icon}
@@ -100,7 +92,7 @@ export function SidebarSubmenuItem({
   link: string;
 }) {
   return (
-    <li className="relative flex items-center py-2 px-3 rounded-md cursor-pointer hover:bg-blue-100 hover:text-blue-600">
+    <li className="relative flex items-center py-2 px-3 rounded-md cursor-pointer hover:bg-blue-500 hover:text-white">
       <a className="flex p-1 w-full" href={link}>
         {text}
       </a>

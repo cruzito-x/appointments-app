@@ -125,26 +125,8 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="p-8 w-full bg-blue-900 text-left">
-        <h1 className="text-3xl font-bold text-white flex items-center">
-          ¡Bienvenid@ {session?.user?.name?.split(" ")[0]}!
-          <span
-            className="inline-block"
-            style={{
-              animation: "wave 1s ease-in-out infinite",
-              marginTop: "-0.5rem",
-            }}
-          >
-            👋🏻
-          </span>
-        </h1>
-        <label className="text-md font-normal text-slate-300">
-          Administra la información de los doctores y sus citas.
-        </label>
-      </div>
-
-      <div className="p-3.5">
-        <div className="text-left my-3 ml-0.5">
+      <div className="p-3.5 overflow-y-auto">
+        <div className="text-left mb-3 ml-0.5">
           <h2 className="text-lg font-semibold text-gray-900">Citas</h2>
           <p className="text-sm text-gray-500">
             Administra tus citas con un simple click.
