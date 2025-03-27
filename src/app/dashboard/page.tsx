@@ -10,8 +10,6 @@ import {
   CiCalendar,
   CiFlag1,
   CiMedicalCross,
-  CiMenuKebab,
-  CiStar,
   CiWarning,
   CiWavePulse1,
 } from "react-icons/ci";
@@ -228,10 +226,10 @@ export default function Dashboard() {
 
           <div className="block w-full h-auto p-6 my-5 bg-white text-blue-900 border-slate-200 shadow-xl rounded-xl cursor-pointer">
             <div className="flex items-center">
-              <CiStar size={21} color="#1e3a8a" />
+              <CiFlag1 size={21} color="#1e3a8a" />
               <h2 className="text-sm font-semibold ml-1">Recordatorios</h2>
               <span className="text-normal text-sm font-semibold ml-28">
-                <button className="text-xs font-medium me-2 px-2.5 py-0.5 rounded-full bg-blue-900 hover:bg-blue-700 text-white">
+                <button className="text-sm font-normal ml-2 px-2 py-1 rounded-md bg-white text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white">
                   Añadir nuevo
                 </button>
               </span>

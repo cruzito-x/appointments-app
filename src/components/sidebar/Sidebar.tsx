@@ -27,7 +27,9 @@ export default function Sidebar({ children }) {
           onClick={() => setExpanded(!expanded)}
           className="text-gray-300"
         >
-          {expanded ? <CiMinimize1 size={22} /> : <CiMaximize1 size={22} />}
+          <div className="hover:bg-blue-500 p-3 rounded">
+            {expanded ? <CiMinimize1 size={22} /> : <CiMaximize1 size={22} />}
+          </div>
         </button>
       </div>
       <hr className="border-1 border-white ml-4 mr-4" />
