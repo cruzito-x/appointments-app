@@ -21,7 +21,7 @@ export default function Sidebar({ children }) {
 
   return (
     <aside
-      className={`h-screen bg-blue-600 text-white ${
+      className={`h-screen bg-blue-900 text-white ${
         expanded ? "w-64" : "w-20"
       } flex flex-col transition-all duration-300`}
     >
@@ -46,9 +46,13 @@ export default function Sidebar({ children }) {
         </nav>
       </SidebarContext.Provider>
       <hr className="border-1 border-white ml-4 mr-4" />
-      <div className="p-3 flex items-center">
+      <div
+        className={`p-3 flex items-center ${
+          expanded ? "ml-4" : "justify-center"
+        }`}
+      >
         <img
-          className="w-10 h-10 rounded-md"
+          className="w-10 h-10 rounded-md cursor-pointer "
           src={`https://ui-avatars.com/api/?name=${session?.user?.name}&background=random&color=fff&bold=true`}
           alt="User Avatar"
         />
