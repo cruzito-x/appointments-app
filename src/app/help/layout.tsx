@@ -1,11 +1,11 @@
 import Items from "@/components/sidebar/Items";
 
 export const metadata = {
-  title: "Sanitos SV | Dashboard",
-  description: "Panel de control de Sanitos SV",
+  title: "Sanitos SV | Ayuda",
+  description: "Centro de Ayuda de Sanitos SV",
 };
 
-export default function DashboardLayout({
+export default function HelpLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function DashboardLayout({
   return (
     <div className="flex">
       <Items />
-      <div className="w-3/5">{children}</div>
+      <div className="p-3 w-full">{children}</div>
     </div>
   );
 }

@@ -1,116 +1,84 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { createContext } from "react";
-import { useSession } from "next-auth/react";
+import { useContext, useState, createContext } from "react";
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import {
+  FiHome,
+  FiUsers,
+  FiShoppingBag,
+  FiMessageSquare,
+  FiSettings,
+  FiLogOut,
+} from "react-icons/fi";
+import { CiMaximize1, CiMinimize1 } from "react-icons/ci";
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-blue-500 shadow-sm transtion-all duration-300">
-        <div className="p-4 pb-2 flex justify-center items-center">
-          {/* <img
-            className={`overflow-hidden my-3 ${expanded ? "w-32" : "w-0"}`}
-            src="https://img.logoipsum.com/297.svg"
-            alt="Logo"
-          /> */}
-          <h3 className="text-white text-md font-semibold py-3">sanitos sv</h3>
-        </div>
-        <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1">{children}</ul>
-        </SidebarContext.Provider>
-        <div className="bg-blue-950 flex p-3">
-          <img
-            className="w-10 h-10 rounded-md"
-            src={`https://ui-avatars.com/api/?name=${session?.user?.name}&background=random&color=3730a3&bold=true`}
-            alt={`${session?.user?.name} Avatar`}
-          />
-          <div
-            className={`flex justify-between items-center overflow-hidden transtion-all ${
-              expanded ? "w-32 ml-3" : "w-0"
-            }`}
-          >
-            <div>
-              <h4 className="font-semibold text-white">
-                {session?.user?.name}⚕️
-              </h4>
-              <span className="text-xs text-slate-300">
-                {session?.user?.email}
-              </span>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </aside>
-  );
-}
-
-export function SidebarItem({
-  icon,
-  text,
-  active,
-  link,
-  alert,
-  children,
-  onClick,
-}: {
-  icon: React.ReactNode;
-  text: string;
-  active?: boolean;
-  link?: string;
-  alert?: boolean;
-  children?: React.ReactNode;
-  onClick?: () => void;
-}) {
-  const { expanded } = useContext(SidebarContext);
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <li
-      className={`relative flex flex-col items-start py-2 px-3 my-1 rounded-md cursor-pointer transition-colors ${
-        active
-          ? "bg-gradient-to-r from-blue-400 to-blue-200"
-          : "hover:bg-blue-50 text-white hover:text-blue-600"
-      } `}
-      onClick={onClick}
+    <aside
+      className={`h-screen bg-blue-600 text-white ${
+        expanded ? "w-64" : "w-20"
+      } flex flex-col transition-all duration-300`}
     >
-      <div className="flex items-center w-full">
-        {link ? (
-          <a className="flex p-1 w-full" href={link}>
-            {icon}
-            <span
-              className={`overflow-hidden transition-all font-normal ${
-                expanded ? "w-32 ml-3" : "w-0 h-0"
-              }`}
-            >
-              {text}
-            </span>
-          </a>
-        ) : (
-          <div className="flex p-1 w-full">
-            {icon}
-            <span
-              className={`overflow-hidden transition-all font-normal ${
-                expanded ? "w-32 ml-3" : "w-0 h-0"
-              }`}
-            >
-              {text}
+      <div
+        className={`p-5 flex ${
+          expanded ? "justify-between" : "justify-center"
+        } items-center`}
+      >
+        {expanded && <h3 className="text-lg font-semibold">sanitos sv</h3>}
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="text-gray-300"
+        >
+          {expanded ? <CiMinimize1 size={22} /> : <CiMaximize1 size={22} />}
+        </button>
+      </div>
+      <hr className="border-1 border-white ml-4 mr-4" />
+      {expanded && <h4 className="text-white ml-7 mt-3">MENÚ</h4>}
+      <SidebarContext.Provider value={{ expanded }}>
+        <nav className="flex-1 p-3">
+          <ul>{children}</ul>
+        </nav>
+      </SidebarContext.Provider>
+      <hr className="border-1 border-white ml-4 mr-4" />
+      <div className="p-3 flex items-center">
+        <img
+          className="w-10 h-10 rounded-md"
+          src={`https://ui-avatars.com/api/?name=${session?.user?.name}&background=random&color=fff&bold=true`}
+          alt="User Avatar"
+        />
+        {expanded && (
+          <div className="p-3">
+            <h4 className="font-semibold">{session?.user?.name}</h4>
+            <span className="text-sm text-slate-300">
+              {session?.user?.email}
             </span>
           </div>
         )}
       </div>
-      {isOpen && children}
-      {alert && (
-        <div
-          className={`absolute right-2/4 w-2 h-2 rounded bg-blue-400 ${
-            expanded ? "" : "top-2"
-          }`}
-        ></div>
+    </aside>
+  );
+}
+
+export function SidebarItem({ icon, text, link, onClick }) {
+  const { expanded } = useContext(SidebarContext);
+  return (
+    <li className="flex items-center p-4 my-1 hover:bg-blue-900 rounded cursor-pointer">
+      {link ? (
+        <Link href={link} className="flex items-center w-full">
+          {icon}
+          {expanded && <span className="ml-3">{text}</span>}
+        </Link>
+      ) : (
+        <div onClick={onClick} className="flex items-center w-full">
+          {icon}
+          {expanded && <span className="ml-3">{text}</span>}
+        </div>
       )}
     </li>
   );

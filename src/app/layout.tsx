@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <SessionProvider>
       <html lang="es">
-        <body>{children}</body>
+        <body className="bg-slate-100">{children}</body>
       </html>
     </SessionProvider>
   );

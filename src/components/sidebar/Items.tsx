@@ -5,10 +5,10 @@ import Sidebar, { SidebarItem } from "@/components/sidebar/Sidebar";
 import {
   CiCalendar,
   CiCircleQuestion,
+  CiGrid42,
   CiLogin,
   CiReceipt,
   CiStethoscope,
-  CiWavePulse1,
 } from "react-icons/ci";
 import { PiFaceMaskLight } from "react-icons/pi";
 
@@ -18,39 +18,39 @@ export default function ClientSidebar() {
   return (
     <Sidebar>
       <SidebarItem
-        icon={<CiWavePulse1 size={20} />}
+        icon={<CiGrid42 size={22} />}
         text="Dashboard"
         link="/dashboard"
       />
       <SidebarItem
-        icon={<CiCalendar size={20} />}
+        icon={<CiCalendar size={22} />}
         text="Citas"
         link="/appointments"
       />
       <SidebarItem
-        icon={<PiFaceMaskLight size={20} />}
+        icon={<PiFaceMaskLight size={22} />}
         text="Pacientes"
         link="/patients"
       />
       <SidebarItem
-        icon={<CiStethoscope size={20} />}
+        icon={<CiStethoscope size={22} />}
         text="Doctores"
         link="/doctors"
       />
       <SidebarItem
-        icon={<CiReceipt size={20} />}
+        icon={<CiReceipt size={22} />}
         text="Facturación"
         link="/billing"
       />
 
-      <hr className="my-3 mr-3 ml-3" />
+      <hr className="border-1 border-white ml-4 mr-4 mt-10" />
       <SidebarItem
-        icon={<CiCircleQuestion size={20} />}
+        icon={<CiCircleQuestion size={22} />}
         text="Ayuda"
         link="/help"
       />
       <SidebarItem
-        icon={<CiLogin size={20} />}
+        icon={<CiLogin size={22} />}
         text="Cerrar Sesión"
         onClick={() => signOut()}
       />
