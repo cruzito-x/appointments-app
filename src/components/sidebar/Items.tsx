@@ -46,7 +46,7 @@ export default function ClientSidebar() {
           link="/billing"
         />
 
-        <hr className="border-1 border-white ml-4 mr-4 mt-10" />
+        <hr className="border-1 border-white ml-4 mr-4 my-5" />
         <SidebarItem
           icon={<CiCircleQuestion size={22} />}
           text="Ayuda"

@@ -51,53 +51,36 @@ appointments-management-app
 ├─ src
 │  ├─ app
 │  │  ├─ api
-│  │  ├─ dashboard
-│  │  │  └─ page.tsx
-│  │  ├─ globals.css
-│  │  ├─ layout.tsx
-│  │  ├─ login
-│  │  │  └─ page.tsx
-│  │  └─ page.tsx
-│  ├─ assets
-│  │  └─ images
-│  │     └─ logo.webp
-│  └─ lib
-│     └─ prisma.js
-├─ tailwind.config.ts
-└─ tsconfig.json
-
-```
-
-```
-appointments-management-app
-├─ next.config.mjs
-├─ package-lock.json
-├─ package.json
-├─ postcss.config.mjs
-├─ prisma
-│  ├─ migrations
-│  │  ├─ 20250325180020_init
-│  │  │  └─ migration.sql
-│  │  └─ migration_lock.toml
-│  └─ schema.prisma
-├─ README.md
-├─ src
-│  ├─ app
-│  │  ├─ api
 │  │  │  └─ auth
-│  │  │     └─ login
-│  │  │        └─ [...nextauth]
-│  │  │           └─ route.ts
+│  │  │     └─ [...nextauth]
+│  │  │        └─ route.ts
 │  │  ├─ dashboard
+│  │  │  ├─ layout.tsx
 │  │  │  └─ page.tsx
 │  │  ├─ globals.css
+│  │  ├─ help
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
 │  │  ├─ layout.tsx
 │  │  ├─ login
+│  │  │  ├─ layout.tsx
 │  │  │  └─ page.tsx
 │  │  └─ page.tsx
 │  ├─ assets
 │  │  └─ images
-│  │     └─ logo.webp
+│  │     └─ logo.png
+│  ├─ components
+│  │  ├─ footer
+│  │  │  └─ Footer.tsx
+│  │  ├─ header
+│  │  │  └─ Header.tsx
+│  │  ├─ loading
+│  │  │  └─ Loading.tsx
+│  │  ├─ sidebar
+│  │  │  ├─ Items.tsx
+│  │  │  └─ Sidebar.tsx
+│  │  └─ table
+│  │     └─ Table.tsx
 │  └─ lib
 │     └─ prisma.ts
 ├─ tailwind.config.ts
