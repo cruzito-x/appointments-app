@@ -6,7 +6,7 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="pt-4 pb-4 pl-3 w-full h-36 flex items-center bg-blue-900 text-left">
+    <div className="p-6 w-full h-36 flex items-center bg-blue-900 text-left">
       <div className="">
         <h1 className="text-3xl font-bold text-white">
           ¡Bienvenid@ {session?.user?.name?.split(" ")[0]}!

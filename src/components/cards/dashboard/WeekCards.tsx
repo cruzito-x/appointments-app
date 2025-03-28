@@ -1,5 +1,3 @@
-import React from "react";
-
 const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
 const WeekCards = ({ patientsPerDay }: any) => {
@@ -7,7 +5,7 @@ const WeekCards = ({ patientsPerDay }: any) => {
 
   return (
     <>
-      <label className="text-normal text-sm font-semibold">
+      <label className="text-normal text-sm text-blue-900 font-semibold">
         Últimos 7 días
       </label>
       <div className="flex gap-4 mt-3 bg-white justify-center">
@@ -30,7 +28,9 @@ const WeekCards = ({ patientsPerDay }: any) => {
                   </label>
                 </div>
               </div>
-              <span className="mt-1 text-xs font-semibold p-1">{day}</span>
+              <span className="mt-1 text-xs font-semibold text-blue-900 p-1">
+                {day}
+              </span>
             </div>
           );
         })}

@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <SessionProvider>
       <html lang="es">
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <body className={`bg-slate-100 ${poppins.className}`}>{children}</body>
       </html>
     </SessionProvider>
