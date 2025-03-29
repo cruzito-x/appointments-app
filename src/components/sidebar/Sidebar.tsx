@@ -53,7 +53,7 @@ export default function Sidebar({ children }) {
         {expanded && (
           <div className="p-3">
             <h4 className="font-semibold">{session?.user?.name}</h4>
-            <span className="text-sm text-slate-300">
+            <span className="text-xs text-slate-300">
               {session?.user?.email}
             </span>
           </div>

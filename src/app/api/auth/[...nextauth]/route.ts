@@ -1,7 +1,7 @@
-// src/app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
+import { scryptSync, timingSafeEqual } from "crypto";
 
 export const authOptions = {
   providers: [
@@ -16,6 +16,7 @@ export const authOptions = {
           throw new Error("Faltan credenciales");
         }
 
+        // Buscar usuario en la base de datos
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
@@ -24,11 +25,26 @@ export const authOptions = {
           throw new Error("Usuario no encontrado");
         }
 
-        if (user.password !== credentials.password) {
+        // Separar salt y hash almacenado
+        const [salt, storedHash] = user.password.split(":");
+
+        // Hashear la contraseña ingresada con el mismo salt
+        const hashedBuffer = scryptSync(credentials.password, salt, 64);
+
+        // Convertir hash almacenado en buffer
+        const storedBuffer = Buffer.from(storedHash, "hex");
+
+        // Comparar de forma segura los hashes
+        if (!timingSafeEqual(hashedBuffer, storedBuffer)) {
           throw new Error("Contraseña incorrecta");
         }
 
-        return { id: `${user.id}`, name: user.name, email: user.email };
+        return {
+          id: `${user.id}`,
+          name: user.username,
+          email: user.email,
+          role: user.roleId,
+        };
       },
     }),
   ],

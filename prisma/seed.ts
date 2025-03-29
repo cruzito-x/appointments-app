@@ -1,85 +1,51 @@
 import { PrismaClient } from "@prisma/client";
-import { faker } from "@faker-js/faker";
+import { randomBytes, scryptSync } from "crypto";
 
 const prisma = new PrismaClient();
 
+function hashPassword(password: string): string {
+  const salt = randomBytes(16).toString("hex");
+  const hashed = scryptSync(password, salt, 64).toString("hex");
+  return `${salt}:${hashed}`;
+}
+
 async function main() {
-  console.log("Seeding database...");
-
-  // Seed Roles
-  const roles = await prisma.role.createMany({
-    data: Array.from({ length: 12 }, () => ({ name: faker.person.jobTitle() })),
+  await prisma.role.createMany({
+    data: [{ name: "Doctor" }, { name: "Admin" }, { name: "Enfermera" }],
+    skipDuplicates: true,
   });
 
-  // Seed Users
-  const users = await prisma.user.createMany({
-    data: Array.from({ length: 12 }, (_, i) => ({
-      username: faker.internet.userName(),
-      password: faker.internet.password(),
-      email: faker.internet.email(),
-      roleId: (i % 12) + 1,
-    })),
+  const roleDoctor = await prisma.role.findFirst({ where: { name: "Doctor" } });
+  const roleAdmin = await prisma.role.findFirst({ where: { name: "Admin" } });
+  const roleEnfermera = await prisma.role.findFirst({
+    where: { name: "Enfermera" },
   });
 
-  // Seed Specialties
-  const specialties = await prisma.specialty.createMany({
-    data: Array.from({ length: 12 }, () => ({ name: faker.word.noun() })),
+  await prisma.user.createMany({
+    data: [
+      {
+        username: "Dr. Martinez",
+        password: hashPassword("22032002"),
+        email: "dmartinez@sanitosv.com",
+        roleId: roleDoctor!.id,
+      },
+      {
+        username: "David Cruz",
+        password: hashPassword("22032002"),
+        email: "dcruz@sanitosv.com",
+        roleId: roleAdmin!.id,
+      },
+      {
+        username: "Henry Cruz",
+        password: hashPassword("14052000"),
+        email: "hcruz@sanitosv.com",
+        roleId: roleEnfermera!.id,
+      },
+    ],
+    skipDuplicates: true,
   });
 
-  // Seed Personal
-  const personal = await prisma.personal.createMany({
-    data: Array.from({ length: 12 }, (_, i) => ({ userId: i + 1 })),
-  });
-
-  // Seed Academic Titles
-  const academicTitles = await prisma.academicTitle.createMany({
-    data: Array.from({ length: 12 }, () => ({
-      name: faker.education.major(),
-      personalId: faker.number.int({ min: 1, max: 12 }),
-    })),
-  });
-
-  // Seed Patients
-  const patients = await prisma.patient.createMany({
-    data: Array.from({ length: 12 }, () => ({
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      birthDate: faker.date.past({ years: 30 }),
-    })),
-  });
-
-  // Seed Appointments
-  const appointments = await prisma.appointment.createMany({
-    data: Array.from({ length: 12 }, () => ({
-      patientId: faker.number.int({ min: 1, max: 12 }),
-      personalId: faker.number.int({ min: 1, max: 12 }),
-      date: faker.date.future(),
-      status: "Scheduled",
-    })),
-  });
-
-  // Seed Reminders
-  const reminders = await prisma.reminder.createMany({
-    data: Array.from({ length: 12 }, () => ({
-      personalId: faker.number.int({ min: 1, max: 12 }),
-      title: faker.lorem.words(3),
-      description: faker.lorem.sentence(),
-      priority: faker.number.int({ min: 1, max: 5 }),
-      status: "Pending",
-      date: faker.date.future(),
-    })),
-  });
-
-  // Seed Payments
-  const payments = await prisma.payment.createMany({
-    data: Array.from({ length: 12 }, () => ({
-      patientId: faker.number.int({ min: 1, max: 12 }),
-      amount: faker.number.float({ min: 20, max: 200 }),
-      date: faker.date.recent(),
-    })),
-  });
-
-  console.log("Database seeded successfully!");
+  console.log("Seeder ejecutado con éxito");
 }
 
 main()

@@ -1,6 +1,6 @@
 import { CiFolderOn } from "react-icons/ci";
 
-const FilesCard = () => {
+const Files = () => {
   return (
     <div className="block w-full h-auto p-6 my-5 bg-white  border-slate-200 shadow-xl rounded-xl">
       <div className="flex items-center">
@@ -77,4 +77,4 @@ const FilesCard = () => {
   );
 };
 
-export default FilesCard;
+export default Files;

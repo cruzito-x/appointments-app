@@ -2,7 +2,7 @@ import Image from "next/image";
 import doctor from "@/assets/images/doctor.webp";
 import { CiBookmark, CiCalendar, CiWarning } from "react-icons/ci";
 
-const AppointmentsCards = () => {
+const Appointments = () => {
   return (
     <div className="grid grid-cols-4 gap-5">
       <div className="block w-72 p-6 bg-blue-900 hover:bg-blue-700 border border-slate-200 shadow-xl rounded-xl cursor-pointer">
@@ -51,4 +51,4 @@ const AppointmentsCards = () => {
   );
 };
 
-export default AppointmentsCards;
+export default Appointments;

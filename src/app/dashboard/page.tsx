@@ -1,7 +1,7 @@
 "use client";
 
 import DoughnutChart from "@/components/charts/dashboard/DoughnutChart";
-import WeekCards from "@/components/cards/dashboard/WeekCards";
+import Attendance from "@/components/cards/dashboard/Attendance";
 import Footer from "@/components/footer/Footer";
 import Loading from "@/components/loading/Loading";
 import Table from "@/components/table/Table";
@@ -9,9 +9,9 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { CiMedicalCross, CiWavePulse1 } from "react-icons/ci";
-import RemindersCard from "@/components/cards/dashboard/RemindersCard";
-import AppointmentsCards from "@/components/cards/dashboard/AppointmentsCards";
-import FilesCard from "@/components/cards/dashboard/FilesCard";
+import Reminders from "@/components/cards/dashboard/Reminders";
+import Appointments from "@/components/cards/dashboard/Appointments";
+import Files from "@/components/cards/dashboard/Files";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -170,7 +170,7 @@ export default function DashboardPage() {
                 Administra tus citas con un simple clic.
               </p>
             </div>
-            <AppointmentsCards />
+            <Appointments />
           </div>
 
           <hr className="border-1 border-slate-400 my-6 w-3/4" />
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                 </h2>
               </div>
               <div className="w-full">
-                <WeekCards
+                <Attendance
                   patientsPerDay={{
                     lun: 10,
                     mar: 15,
@@ -229,9 +229,8 @@ export default function DashboardPage() {
               <DoughnutChart />
             </div>
 
-            <RemindersCard />
-
-            <FilesCard />
+            <Reminders />
+            <Files />
           </div>
         </div>
       </div>

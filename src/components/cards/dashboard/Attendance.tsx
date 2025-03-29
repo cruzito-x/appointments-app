@@ -1,6 +1,6 @@
 const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
-const WeekCards = ({ patientsPerDay }: any) => {
+const Attendance = ({ patientsPerDay }: any) => {
   const maxPatients: number = Math.max(...Object.values(patientsPerDay));
 
   return (
@@ -39,4 +39,4 @@ const WeekCards = ({ patientsPerDay }: any) => {
   );
 };
 
-export default WeekCards;
+export default Attendance;

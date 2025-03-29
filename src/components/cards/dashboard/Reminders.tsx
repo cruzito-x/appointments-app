@@ -1,6 +1,6 @@
 import { CiFlag1 } from "react-icons/ci";
 
-const RemindersCard = () => {
+const Reminders = () => {
   return (
     <div className="block w-full h-auto p-6 my-5 bg-white border-slate-200 shadow-xl rounded-xl">
       <div className="flex items-center">
@@ -106,4 +106,4 @@ const RemindersCard = () => {
   );
 };
 
-export default RemindersCard;
+export default Reminders;
