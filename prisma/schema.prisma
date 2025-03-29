@@ -7,133 +7,162 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id                    Int               @id @default(autoincrement())
-  name                  String
-  email                 String            @unique
-  password              String
-  role                  String            @default("patient") @db.VarChar(20)
-  createdAt             DateTime          @default(now()) @map("created_at")
-  addresses             Address[]
-  appointmentsAsPatient Appointment[]     @relation("PatientAppointments")
-  appointmentsAsDoctor  Appointment[]     @relation("DoctorAppointments")
-  messagesSent          Message[]         @relation("SenderMessages")
-  messagesReceived      Message[]         @relation("ReceiverMessages")
-  reviewsGiven          Review[]          @relation("PatientReviews")
-  reviewsReceived       Review[]          @relation("DoctorReviews")
-  medicalRecord         MedicalRecord?
-  specialties           DoctorSpecialty[]
-  availabilities        Availability[]
-  notifications         Notification[]
+model Role {
+  id         Int      @id @default(autoincrement())
+  name       String
+  users      User[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
-model Address {
-  id      Int    @id @default(autoincrement())
-  userId  Int    @unique
-  street  String
-  city    String
-  state   String
-  zipCode String @map("zip_code")
-  country String
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+model User {
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  password   String
+  email      String   @unique
+  roleId     Int
+  role       Role     @relation(fields: [roleId], references: [id])
+  personal   Personal?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
 model Specialty {
-  id      Int               @id @default(autoincrement())
-  name    String            @unique
-  doctors DoctorSpecialty[]
+  id         Int      @id @default(autoincrement())
+  name       String
+  personal   PersonalSpecialty[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
-model DoctorSpecialty {
-  doctorId    Int
-  specialtyId Int
-  doctor      User      @relation(fields: [doctorId], references: [id], onDelete: Cascade)
-  specialty   Specialty @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
+model Personal {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @unique
+  user       User     @relation(fields: [userId], references: [id])
+  specialties PersonalSpecialty[]
+  reminders  Reminder[]
+  titles     AcademicTitle[]
+  appointments Appointment[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+}
 
-  @@id([doctorId, specialtyId])
+model AcademicTitle {
+  id         Int      @id @default(autoincrement())
+  name       String
+  personalId Int
+  personal   Personal @relation(fields: [personalId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+}
+
+model PersonalSpecialty {
+  id           Int      @id @default(autoincrement())
+  personalId   Int
+  specialtyId  Int
+  personal     Personal  @relation(fields: [personalId], references: [id])
+  specialty    Specialty @relation(fields: [specialtyId], references: [id])
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  deleted_at   DateTime?
+}
+
+model Patient {
+  id         Int      @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  birthDate  DateTime
+  appointments Appointment[]
+  payments   Payment[]
+  files      PatientFile[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
 model Appointment {
-  id              Int      @id @default(autoincrement())
-  patientId       Int
-  doctorId        Int
-  appointmentDate DateTime @map("appointment_date")
-  status          String   @default("pending") @db.VarChar(20)
-  createdAt       DateTime @default(now()) @map("created_at")
-
-  patient User                 @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
-  doctor  User                 @relation("DoctorAppointments", fields: [doctorId], references: [id], onDelete: Cascade)
-  history AppointmentHistory[]
-  payment Payment?
+  id         Int      @id @default(autoincrement())
+  patientId  Int
+  personalId Int
+  date       DateTime
+  status     String
+  patient    Patient  @relation(fields: [patientId], references: [id])
+  personal   Personal @relation(fields: [personalId], references: [id])
+  history    AppointmentHistory[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
 model AppointmentHistory {
-  id            Int         @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   appointmentId Int
-  status        String      @db.VarChar(20)
-  changedAt     DateTime    @default(now()) @map("changed_at")
-  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  status        String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  deleted_at    DateTime?
 }
 
-model MedicalRecord {
-  id          Int      @id @default(autoincrement())
-  patientId   Int      @unique
-  history     String?
-  allergies   String?
-  medications String?
-  createdAt   DateTime @default(now()) @map("created_at")
-
-  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+model Reminder {
+  id         Int      @id @default(autoincrement())
+  personalId Int
+  title      String
+  description String?
+  priority   Int
+  status     String
+  date       DateTime
+  personal   Personal @relation(fields: [personalId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
 model Payment {
-  id            Int      @id @default(autoincrement())
-  appointmentId Int      @unique
-  amount        Float
-  paymentDate   DateTime @default(now()) @map("payment_date")
-  paymentStatus String   @default("pending") @db.VarChar(20)
-
-  appointment Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
-}
-
-model Availability {
-  id        Int      @id @default(autoincrement())
-  doctorId  Int
-  dayOfWeek String   @db.VarChar(10)
-  startTime DateTime
-  endTime   DateTime
-  doctor    User     @relation(fields: [doctorId], references: [id], onDelete: Cascade)
-}
-
-model Review {
-  id        Int      @id @default(autoincrement())
-  patientId Int
-  doctorId  Int
-  rating    Int
-  review    String?
-  createdAt DateTime @default(now()) @map("created_at")
-
-  patient User @relation("PatientReviews", fields: [patientId], references: [id], onDelete: Cascade)
-  doctor  User @relation("DoctorReviews", fields: [doctorId], references: [id], onDelete: Cascade)
-}
-
-model Message {
   id         Int      @id @default(autoincrement())
-  senderId   Int
-  receiverId Int
-  message    String
-  sentAt     DateTime @default(now()) @map("sent_at")
-
-  sender   User @relation("SenderMessages", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver User @relation("ReceiverMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  patientId  Int
+  amount     Float
+  date       DateTime
+  patient    Patient  @relation(fields: [patientId], references: [id])
+  details    PaymentDetail[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }
 
-model Notification {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  message   String
-  isRead    Boolean  @default(false) @map("is_read")
-  createdAt DateTime @default(now()) @map("created_at")
+model PaymentDetail {
+  id         Int      @id @default(autoincrement())
+  paymentId  Int
+  description String
+  amount     Float
+  payment    Payment @relation(fields: [paymentId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+}
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model PatientFile {
+  id         Int      @id @default(autoincrement())
+  patientId  Int
+  patient    Patient  @relation(fields: [patientId], references: [id])
+  details    PatientFileDetail[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
+}
+
+model PatientFileDetail {
+  id         Int      @id @default(autoincrement())
+  patientFileId Int
+  filePath   String
+  description String?
+  patientFile PatientFile @relation(fields: [patientFileId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  deleted_at DateTime?
 }

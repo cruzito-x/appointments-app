@@ -13,7 +13,7 @@ import RemindersCard from "@/components/cards/dashboard/RemindersCard";
 import AppointmentsCards from "@/components/cards/dashboard/AppointmentsCards";
 import FilesCard from "@/components/cards/dashboard/FilesCard";
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -174,14 +174,13 @@ export default function Dashboard() {
           </div>
 
           <hr className="border-1 border-slate-400 my-6 w-3/4" />
-
-          <div className="text-left my-3 ml-0.5">
-            <h2 className="text-lg font-semibold text-gray-900">Pacientes</h2>
-            <p className="text-sm text-gray-500">
-              Administra la información de tus pacientes.
-            </p>
-          </div>
           <div className="bg-white rounded-xl p-3 shadow-xl">
+            <div className="text-left my-3 ml-0.5">
+              <h2 className="text-lg font-semibold text-gray-900">Pacientes</h2>
+              <p className="text-sm text-gray-500">
+                Administra la información de tus pacientes.
+              </p>
+            </div>
             <Table columns={patientsColumns} data={patientsData} />
           </div>
 
@@ -199,9 +198,9 @@ export default function Dashboard() {
         </div>
         <div className="w-1/4 p-3.5">
           <div className="h-screen text-2xl">
-            <div className="block w-full p-6 my-5 bg-white border border-slate-200 shadow-xl rounded-xl">
+            <div className="block w-full p-6 mb-5 bg-white border border-slate-200 shadow-xl rounded-xl">
               <div className="flex items-center">
-                <CiWavePulse1 size={21} color="#1e3a8a" />
+                <CiWavePulse1 size={22} className="text-blue-900" />
                 <h2 className="text-sm font-semibold text-blue-900 ml-1">
                   Actividad
                 </h2>
@@ -222,7 +221,7 @@ export default function Dashboard() {
 
               <hr className="my-6 border-1 border-slate-400" />
               <div className="flex items-center">
-                <CiMedicalCross size={21} color="#1e3a8a" />
+                <CiMedicalCross size={22} className="text-blue-900" />
                 <h2 className="text-sm font-semibold text-blue-900 ml-1">
                   Top 5 Doctores
                 </h2>

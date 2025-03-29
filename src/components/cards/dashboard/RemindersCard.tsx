@@ -4,7 +4,7 @@ const RemindersCard = () => {
   return (
     <div className="block w-full h-auto p-6 my-5 bg-white border-slate-200 shadow-xl rounded-xl">
       <div className="flex items-center">
-        <CiFlag1 size={21} color="#1e3a8a" />
+        <CiFlag1 size={22} className="text-blue-900" />
         <h2 className="text-sm font-semibold text-blue-900 ml-1">
           Recordatorios
         </h2>
@@ -14,7 +14,7 @@ const RemindersCard = () => {
           </button>
         </span>
       </div>
-      <div className="space-y-2.5 mt-3">
+      <div className="space-y-3 mt-3">
         <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
           <div className="flex items-center justify-between px-2">
             <label className="text-sm font-bold text-blue-700">08:30 AM</label>
