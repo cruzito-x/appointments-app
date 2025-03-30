@@ -18,7 +18,7 @@ const Attendance = ({ patientsPerDay }: any) => {
               key={day}
               className="w-24 h-44 px-0.5 flex flex-col items-center bg-white"
             >
-              <div className="relative w-full h-full bg-blue-50 rounded-t-md overflow-hidden">
+              <div className="relative w-full h-full bg-blue-50 rounded-t-md overflow-hidden cursor-pointer">
                 <div
                   className="absolute bottom-0 w-full rounded-md flex items-center justify-center bg-blue-900 hover:bg-blue-500 transition-all duration-200"
                   style={{ height: `${fillHeight}%` }}
@@ -28,7 +28,7 @@ const Attendance = ({ patientsPerDay }: any) => {
                   </label>
                 </div>
               </div>
-              <span className="mt-1 text-xs font-semibold text-blue-900 p-1">
+              <span className="mt-1 text-xs font-semibold text-blue-700 p-1">
                 {day}
               </span>
             </div>

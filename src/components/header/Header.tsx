@@ -9,8 +9,7 @@ const Header = () => {
     <div className="p-6 w-full h-36 flex items-center bg-blue-900 text-left">
       <div className="">
         <h1 className="text-3xl font-bold text-white">
-          ¡Bienvenid@ {session?.user?.role === 1 ? "Dr. " : ""}
-          {session?.user?.name?.split(" ")[0]}!
+          ¡Bienvenid@ {session?.user?.name?.split(" ")[0]}!
           <span
             className="inline-block"
             style={{
@@ -21,7 +20,7 @@ const Header = () => {
             👋🏻
           </span>
         </h1>
-        <label className="text-md font-normal text-slate-300">
+        <label className="text-md font-normal text-slate-200">
           Administra la información de los doctores y sus citas.
         </label>
       </div>

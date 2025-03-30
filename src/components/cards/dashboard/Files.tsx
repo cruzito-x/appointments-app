@@ -1,3 +1,4 @@
+import SeeMore from "@/components/buttons/seeMore/seeMore";
 import { CiFolderOn } from "react-icons/ci";
 
 const Files = () => {
@@ -65,12 +66,7 @@ const Files = () => {
         </div>
 
         <div className="items-start px-2">
-          <a
-            href="/files"
-            className="w-24 py-2 text-blue-900 hover:text-blue-500 font-normal text-sm"
-          >
-            Ver todos &gt;&gt;&gt;
-          </a>
+          <SeeMore url="/files" label="Ver todos" />
         </div>
       </div>
     </div>

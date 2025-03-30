@@ -159,13 +159,37 @@ export default function DashboardPage() {
     },
   ];
 
+  const doctorsData = [
+    {
+      id: 1,
+      name: "Dr. John Doe",
+      appointment: "12:30 PM - 1:30 PM",
+      specialty: "Cardiología",
+      availability: "Disponible",
+    },
+    {
+      id: 2,
+      name: "Dr. Jane Smith",
+      appointment: "10:00 AM - 11:00 AM",
+      specialty: "Dermatología",
+      availability: "Disponible",
+    },
+    {
+      id: 3,
+      name: "Dr. David Cruz",
+      appointment: "1:00 PM - 2:00 PM",
+      specialty: "Ginecología",
+      availability: "Disponible",
+    },
+  ];
+
   return (
     <div className="w-full">
       <div className="flex">
         <div className="w-3/4 p-3.5 overflow-y-auto">
           <div className="bg-white p-3.5 rounded-xl">
             <div className="text-left mb-3 ml-0.5">
-              <h2 className="text-lg font-semibold text-gray-900">Citas</h2>
+              <h2 className="text-lg font-semibold text-black">Citas</h2>
               <p className="text-sm text-gray-500">
                 Administra tus citas con un simple clic.
               </p>
@@ -176,7 +200,7 @@ export default function DashboardPage() {
           <hr className="border-1 border-slate-400 my-6 w-3/4" />
           <div className="bg-white rounded-xl p-3 shadow-xl">
             <div className="text-left my-3 ml-0.5">
-              <h2 className="text-lg font-semibold text-gray-900">Pacientes</h2>
+              <h2 className="text-lg font-semibold text-black">Pacientes</h2>
               <p className="text-sm text-gray-500">
                 Administra la información de tus pacientes.
               </p>
@@ -186,14 +210,14 @@ export default function DashboardPage() {
 
           <hr className="border-1 border-slate-400 my-6 w-full" />
 
-          <div className="text-left my-3 ml-0.5">
-            <h2 className="text-lg font-semibold text-gray-900">Doctores</h2>
-            <p className="text-sm text-gray-500">
-              Administra y gestiona las actividades del personal.
-            </p>
-          </div>
           <div className="bg-white rounded-xl p-3 shadow-xl mb-5">
-            <Table columns={doctorsColumns} data={patientsData} />
+            <div className="text-left my-3 ml-0.5">
+              <h2 className="text-lg font-semibold text-black">Doctores</h2>
+              <p className="text-sm text-gray-500">
+                Administra y gestiona las actividades del personal.
+              </p>
+            </div>
+            <Table columns={doctorsColumns} data={doctorsData} />
           </div>
         </div>
         <div className="w-1/4 p-3.5">

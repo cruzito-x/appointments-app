@@ -1,3 +1,4 @@
+import Header from "@/components/header/Header";
 import Items from "@/components/sidebar/Items";
 
 export const metadata = {
@@ -11,9 +12,13 @@ export default function DoctorsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Items />
-      <div className="p-3 w-full">{children}</div>
+
+      <div className="flex flex-col w-full">
+        <Header />
+        <div className="flex-grow overflow-y-auto">{children}</div>
+      </div>
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function Sidebar({ children }) {
   return (
     <aside
       className={`h-screen bg-blue-900 text-white ${
-        expanded ? "w-64" : "w-20"
+        expanded ? "w-56" : "w-20"
       } flex flex-col transition-all duration-300`}
     >
       <div
