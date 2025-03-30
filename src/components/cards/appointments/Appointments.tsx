@@ -34,7 +34,9 @@ const Appointments = () => {
           </h2>
         </div>
 
-        <SeeMore link="#" label="Ver detalles" />
+        <div className="items-start">
+          <SeeMore link="#" label="Ver detalles" />
+        </div>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const Reminders = () => {
           </button>
         </span>
       </div>
-      <div className="space-y-3 mt-3">
+      <div className="space-y-2 mt-3">
         <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
           <div className="flex items-center justify-between px-2">
             <label className="text-sm font-bold text-blue-700">08:30 AM</label>

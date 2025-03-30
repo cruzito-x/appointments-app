@@ -53,7 +53,9 @@ const File = () => {
             7415-0122
           </label>
         </div>
-        <SeeMore link="#" label="Ver detalles" />
+        <div className="items-start">
+          <SeeMore link="#" label="Ver detalles" />
+        </div>
       </div>
     </div>
   );

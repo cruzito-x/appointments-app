@@ -14,7 +14,7 @@ const Profile = () => {
   return (
     <div className="grid grid-cols-5 gap-12">
       <div className="block w-72 p-6 bg-white border shadow-lg rounded-xl cursor-pointer">
-        <div className="flex items-center justify-center mb-2">
+        <div className="flex items-center justify-center">
           <div className="rounded w-2/5 bg-blue-500 p-3.5">
             <Image src={doctor} width={80} height={80} alt="Profile Photo" />
           </div>
@@ -36,16 +36,16 @@ const Profile = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <CiMoneyBill size={18} className="text-green-500 my-1" />
+          <CiMoneyBill size={18} className="text-green-500 my-2" />
           <span className="text-gray-600 text-xs m-1">
             Precio de consulta:
-            <label className="text-gray-600 text-xs"> $3 / hora </label>
+            <label className="text-gray-600 text-xs"> $3 </label>
           </span>
         </div>
-        <div className="flex justify-center space-x-2 mt-3">
+        <div className="flex justify-center space-x-2">
           <div className="rounded p-3 bg-slate-300 hover:bg-slate-200 flex items-center transition-all duration-300">
             <CiMedal size={22} className="text-gray-500" />
-            <div className="text-gray-500 ml-3">
+            <div className="text-gray-500 ml-1.5">
               <span className="text-sm font-bold">
                 +7 años <br />
                 <label className="text-xs font-normal">Experiencia</label>
@@ -54,7 +54,7 @@ const Profile = () => {
           </div>
           <div className="rounded p-3 bg-slate-300 hover:bg-slate-200 flex items-center transition-all duration-300">
             <CiUser size={22} className="text-gray-500" />
-            <div className="text-gray-500 ml-3">
+            <div className="text-gray-500 ml-1.5">
               <span className="text-sm font-bold">
                 120 <br />
                 <label className="text-xs font-normal">Pacientes</label>
@@ -62,7 +62,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <SeeMore link="#" label="Ver detalles" />
+        <div className="items-start">
+          <SeeMore link="#" label="Ver detalles" />
+        </div>
       </div>
     </div>
   );

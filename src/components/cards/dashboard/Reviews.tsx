@@ -5,7 +5,7 @@ import SeeMore from "@/components/buttons/seeMore/SeeMore";
 
 const Reviews = () => {
   return (
-    <div className="mb-3 space-y-2.5">
+    <div className="mb-3 space-y-3">
       <div className="flex items-center">
         <div className="rounded bg-blue-500 p-3.5">
           <Image src={doctor} width={40} height={40} alt="Profile Photo" />

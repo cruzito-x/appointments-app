@@ -10,7 +10,7 @@ const Files = () => {
           Expedientes nuevos
         </h2>
       </div>
-      <div className="space-y-4 mt-3">
+      <div className="space-y-2 mt-1">
         <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
           <div className="flex items-center justify-between px-2">
             <label className="text-sm font-bold text-blue-700">
@@ -65,9 +65,9 @@ const Files = () => {
           </p>
         </div>
 
-        <div className="items-start px-2">
+        {/* <div className="items-start px-2">
           <SeeMore link="/files" label="Ver todos" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

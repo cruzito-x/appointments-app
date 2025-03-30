@@ -14,6 +14,8 @@ import Appointments from "@/components/cards/dashboard/Appointments";
 import Files from "@/components/cards/dashboard/Files";
 import Personal from "@/components/cards/dashboard/Personal";
 import Reviews from "@/components/cards/dashboard/Reviews";
+import HorizontalBarChart from "@/components/charts/dashboard/HorizontalBarChart";
+import PieChart from "@/components/charts/dashboard/PieChart";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -189,7 +191,7 @@ export default function DashboardPage() {
     <div className="w-full">
       <div className="flex">
         <div className="w-3/4 p-3.5 overflow-y-auto">
-          <div className="bg-white p-3.5 rounded-xl">
+          <div className="bg-white p-3.5 rounded-xl shadow-xl">
             <div className="text-left mb-3 ml-0.5">
               <h2 className="text-lg font-semibold text-blue-900">Citas</h2>
               <p className="text-sm text-gray-500">
@@ -197,24 +199,18 @@ export default function DashboardPage() {
               </p>
             </div>
             <Appointments />
-          </div>
-
-          <hr className="border-1 border-slate-400 my-6 w-3/4" />
-          <div className="bg-white rounded-xl p-3 shadow-xl">
-            <div className="text-left my-3 ml-0.5">
+            <div className="text-left mt-12 mb-6 ml-0.5">
               <h2 className="text-lg font-semibold text-blue-900">Pacientes</h2>
               <p className="text-sm text-gray-500">
                 Administra la información de tus pacientes.
               </p>
             </div>
-            <Table columns={patientsColumns} data={patientsData} length={6} />
+            <Table columns={patientsColumns} data={patientsData} length={7} />
           </div>
 
-          <hr className="border-1 border-slate-400 my-6 w-full" />
-
-          <div className="flex space-x-5">
+          <div className="flex space-x-3 mt-5">
             <div className="w-3/5">
-              <div className="bg-white rounded-xl p-3 shadow-xl mb-5">
+              <div className="bg-white rounded-xl shadow-xl p-3 mb-5">
                 <div className="text-left my-3 ml-0.5">
                   <h2 className="text-lg font-semibold text-blue-900">
                     Personal
@@ -227,7 +223,7 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="w-2/5">
-              <div className="bg-white rounded-xl p-3 shadow-xl mb-5">
+              <div className="bg-white rounded-xl shadow-xl p-3 mb-5">
                 <div className="text-left my-3 ml-0.5">
                   <h2 className="text-lg font-semibold text-blue-900">
                     Reviews
@@ -240,10 +236,38 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
+          <div className="flex space-x-3">
+            <div className="w-1/2">
+              <div className="bg-white rounded-xl shadow-xl p-3 mb-5">
+                <div className="text-left my-3 ml-0.5">
+                  <h2 className="text-lg font-semibold text-blue-900">
+                    Tasa de diagnósticos
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Administra tu tasa de diagnósticos.
+                  </p>
+                </div>
+                <HorizontalBarChart />
+              </div>
+            </div>
+            <div className="w-1/2">
+              <div className="bg-white rounded-xl shadow-xl p-3 mb-5">
+                <div className="text-left my-3 ml-0.5">
+                  <h2 className="text-lg font-semibold text-blue-900">
+                    Tasa de atenciones
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Estadísticas de atenciones por género.
+                  </p>
+                </div>
+                <PieChart />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="w-1/4 p-3.5">
           <div className="h-screen text-2xl">
-            <div className="block w-full p-6 mb-5 bg-white border border-slate-200 shadow-xl rounded-xl">
+            <div className="block w-full p-6 bg-white border border-slate-200 rounded-xl shadow-xl">
               <div className="flex items-center">
                 <CiWavePulse1 size={22} className="text-blue-900" />
                 <h2 className="text-sm font-semibold text-blue-900 ml-1">
