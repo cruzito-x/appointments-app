@@ -40,7 +40,9 @@ const Personal = () => {
           {icons.map((icon, index) => (
             <div
               key={index}
-              className={`block w-full p-6 ${colors[index]} ${hoverColors[index]} border border-slate-200 shadow-xl rounded-xl cursor-pointer`}
+              className={`block w-full p-6 ${colors[index % colors.length]} ${
+                hoverColors[index % hoverColors.length]
+              } border border-slate-200 shadow-xl rounded-xl cursor-pointer`}
             >
               <div className="flex items-center mb-5">
                 {icon}
