@@ -2,7 +2,7 @@ import DataTable from "react-data-table-component";
 import styled from "styled-components";
 import Loading from "../loading/Loading";
 
-const Table = ({ columns, data, length }) => {
+const Table = ({ columns = {}, data = {}, length = 0 }) => {
   const StyledDataTable = styled(DataTable)`
     .rdt_Table {
       border-collapse: collapse !important;

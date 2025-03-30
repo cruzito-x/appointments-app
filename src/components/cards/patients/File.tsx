@@ -1,6 +1,6 @@
 import Image from "next/image";
 import doctor from "@/assets/images/logo.png";
-import { CiFolderOn, CiHeart, CiMedal, CiUser } from "react-icons/ci";
+import { CiFolderOn } from "react-icons/ci";
 import SeeMore from "@/components/buttons/seeMore/SeeMore";
 
 const File = () => {

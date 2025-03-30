@@ -31,7 +31,7 @@ export default function DashboardPage() {
     return <Loading />;
   }
 
-  const patientsColumns = [
+  const patientsColumns: Array<any> = [
     {
       name: "Nombre",
       selector: (row: any) => row.name,
@@ -57,33 +57,7 @@ export default function DashboardPage() {
     },
   ];
 
-  const doctorsColumns = [
-    {
-      name: "Nombre",
-      selector: (row: any) => row.name,
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Especialidad",
-      selector: (row: any) => row.appointment,
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Disponibilidad",
-      selector: (row: any) => row.specialty,
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Agendar cita",
-      selector: (row: any) => row.specialty,
-      center: true,
-    },
-  ];
-
-  const patientsData = [
+  const patientsData: Array<any> = [
     {
       id: 1,
       name: "John Doe",
@@ -160,30 +134,6 @@ export default function DashboardPage() {
       phone: "7415-0122",
       appointment: "1:00 PM - 2:00 PM",
       specialty: "Ginecología",
-    },
-  ];
-
-  const doctorsData = [
-    {
-      id: 1,
-      name: "Dr. John Doe",
-      appointment: "12:30 PM - 1:30 PM",
-      specialty: "Cardiología",
-      availability: "Disponible",
-    },
-    {
-      id: 2,
-      name: "Dr. Jane Smith",
-      appointment: "10:00 AM - 11:00 AM",
-      specialty: "Dermatología",
-      availability: "Disponible",
-    },
-    {
-      id: 3,
-      name: "Dr. David Cruz",
-      appointment: "1:00 PM - 2:00 PM",
-      specialty: "Ginecología",
-      availability: "Disponible",
     },
   ];
 

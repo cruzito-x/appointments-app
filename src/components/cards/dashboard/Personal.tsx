@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   CiHeart,
   CiLollipop,
@@ -6,60 +5,53 @@ import {
   CiStethoscope,
   CiWheat,
 } from "react-icons/ci";
-import personal from "@/assets/images/personal.webp";
 
 const Personal = () => {
+  const icons = [
+    <CiStethoscope size={21} className="text-white" />,
+    <CiWheat size={21} className="text-white" />,
+    <CiLollipop size={21} className="text-white" />,
+    <CiHeart size={21} className="text-white" />,
+    <CiMedicalCross size={21} className="text-white" />,
+  ];
+
+  const titles = [
+    "Med. General",
+    "Dermatología",
+    "Pediatría",
+    "Cardiología",
+    "Enfermería",
+  ];
+
+  const counters = [120, 150, 180, 210, 240];
+
+  const colors = [900, 700, 500, 300];
+  const hoverColors = [700, 500, 300, 300];
+
   return (
     <div className="mb-3">
       <div className="flex">
-        <div className="grid grid-cols-4 gap-1 mb-3">
-          <div className="block w-full p-6 bg-blue-900 hover:bg-blue-700 border border-slate-200 shadow-xl rounded-xl cursor-pointer">
-            <div className="flex items-center mb-5">
-              <CiStethoscope size={21} className="text-white" />
-              <h2 className="text-white text-sm font-normal ml-1">
-                Med. general
-              </h2>
+        <div className="grid grid-cols-4 gap-3 mb-3">
+          {icons.map((icon, index) => (
+            <div
+              key={index}
+              className={`block w-full p-6 bg-blue-${
+                colors[index % colors.length]
+              } hover:bg-blue-${
+                hoverColors[index % hoverColors.length]
+              } border border-slate-200 shadow-xl rounded-xl cursor-pointer`}
+            >
+              <div className="flex items-center mb-5">
+                {icon}
+                <h2 className="text-white text-sm font-normal ml-1">
+                  {titles[index]}
+                </h2>
+              </div>
+              <label className="text-white text-3xl font-semibold">
+                {counters[index]}
+              </label>
             </div>
-            <label className="text-white text-3xl font-semibold">45</label>
-          </div>
-
-          <div className="block w-full p-6 bg-blue-700 hover:bg-blue-500 border border-slate-200 shadow-xl rounded-xl cursor-pointer">
-            <div className="flex items-center mb-5">
-              <CiWheat size={21} className="text-white" />
-              <h2 className="text-white text-sm font-normal ml-1">
-                Dermatología
-              </h2>
-            </div>
-            <label className="text-white text-3xl font-semibold">14</label>
-          </div>
-
-          <div className="block w-full p-6 bg-blue-500 hover:bg-blue-300 border border-slate-200 shadow-xl rounded-xl cursor-pointer">
-            <div className="flex items-center mb-5">
-              <CiLollipop size={21} className="text-white" />
-              <h2 className="text-white text-sm font-normal ml-1">Pediatría</h2>
-            </div>
-            <label className="text-white text-3xl font-semibold">12</label>
-          </div>
-
-          <div className="block w-full p-6 bg-blue-300 hover:bg-blue-300 border border-slate-200 shadow-xl rounded-xl cursor-pointer">
-            <div className="flex items-center mb-5">
-              <CiHeart size={21} className="text-white" />
-              <h2 className="text-white text-sm font-normal ml-1">
-                Cardiología
-              </h2>
-            </div>
-            <label className="text-white text-3xl font-semibold">12</label>
-          </div>
-
-          <div className="block w-full p-6 bg-blue-900 hover:bg-blue-700 border border-slate-200 shadow-xl rounded-xl cursor-pointer">
-            <div className="flex items-center mb-5">
-              <CiMedicalCross size={21} className="text-white" />
-              <h2 className="text-white text-sm font-normal ml-1">
-                Enfermería
-              </h2>
-            </div>
-            <label className="text-white text-3xl font-semibold">12</label>
-          </div>
+          ))}
         </div>
       </div>
     </div>

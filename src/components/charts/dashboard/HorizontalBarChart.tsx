@@ -37,18 +37,7 @@ const HorizontalBarChart = () => {
     datasets: [
       {
         data: [35, 50, 40, 30, 25, 45, 38, 20, 33, 29],
-        backgroundColor: [
-          "#1e3a8a",
-          "#1e40af",
-          "#1e3a8a",
-          "#1d4ed8",
-          "#2563eb",
-          "#3b82f6",
-          "#60a5fa",
-          "#93c5fd",
-          "#bfdbfe",
-          "#dbeafe",
-        ],
+        backgroundColor: ["#1e3a8a", "#1c4fd8", "#3b82f6", "#93c4fc"],
         borderWidth: 0,
       },
     ],
