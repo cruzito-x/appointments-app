@@ -43,7 +43,7 @@ const DoughnutChart = () => {
   return (
     <>
       <label className="text-normal text-xs text-blue-900 font-semibold">
-        Últimos 7 días
+        Últimos 30 días
       </label>
       <div className="w-72 mx-auto">
         <Doughnut data={data} options={options} />

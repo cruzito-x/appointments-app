@@ -1,7 +1,7 @@
 "use client";
 
 import DoughnutChart from "@/components/charts/dashboard/DoughnutChart";
-import Attendance from "@/components/cards/dashboard/Attendance";
+import Attentions from "@/components/cards/dashboard/Attentions";
 import Footer from "@/components/footer/Footer";
 import Loading from "@/components/loading/Loading";
 import Table from "@/components/table/Table";
@@ -197,7 +197,9 @@ export default function DashboardPage() {
                     Administra tu tasa de diagnósticos.
                   </p>
                 </div>
-                <HorizontalBarChart />
+                <div className="ml-0.5">
+                  <HorizontalBarChart />
+                </div>
               </div>
             </div>
             <div className="w-1/2">
@@ -210,7 +212,9 @@ export default function DashboardPage() {
                     Estadísticas de atenciones por género.
                   </p>
                 </div>
-                <PieChart />
+                <div className="ml-0.5">
+                  <PieChart />
+                </div>
               </div>
             </div>
           </div>
@@ -225,7 +229,7 @@ export default function DashboardPage() {
                 </h2>
               </div>
               <div className="w-full">
-                <Attendance
+                <Attentions
                   patientsPerDay={{
                     lun: 10,
                     mar: 15,

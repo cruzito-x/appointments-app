@@ -1,7 +1,15 @@
-const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+const Attentions = ({ patientsPerDay }) => {
+  const maxPatients = Math.max(...Object.values(patientsPerDay));
 
-const Attendance = ({ patientsPerDay }) => {
-  const maxPatients: number = Math.max(...Object.values(patientsPerDay));
+  const daysOfWeek: Array<string> = [
+    "Lun",
+    "Mar",
+    "Mié",
+    "Jue",
+    "Vie",
+    "Sáb",
+    "Dom",
+  ];
 
   return (
     <>
@@ -39,4 +47,4 @@ const Attendance = ({ patientsPerDay }) => {
   );
 };
 
-export default Attendance;
+export default Attentions;
