@@ -17,7 +17,7 @@ const Profile = () => {
   >([]);
 
   const getPersonal = async () => {
-    const response = await fetch("/api/personal", {
+    const response = await fetch("/api/doctors", {
       method: "GET",
     });
     const personalData = await response.json();
