@@ -18,8 +18,12 @@ const Appointments = () => {
     `+${semanalCounters[2]} desde la semana pasada.`,
   ];
 
-  const colors = [900, 700, 500];
-  const hoverColors = [700, 500, 300];
+  const colors = ["bg-blue-900", "bg-blue-700", "bg-blue-500"];
+  const hoverColors = [
+    "hover:bg-blue-700",
+    "hover:bg-blue-500",
+    "hover:bg-blue-300",
+  ];
 
   useEffect(() => {
     setCounters([43, 12, 32]);
@@ -31,11 +35,7 @@ const Appointments = () => {
       {icons.map((icon, index) => (
         <div
           key={index}
-          className={`block w-72 p-6 bg-blue-${
-            colors[index % colors.length]
-          } hover:bg-blue-${
-            hoverColors[index % hoverColors.length]
-          } border border-slate-200 shadow-xl rounded-xl cursor-pointer`}
+          className={`block w-72 p-6 ${colors[index]} ${hoverColors[index]} border border-slate-200 shadow-xl rounded-xl cursor-pointer`}
         >
           <div className="flex items-center mb-5">
             {icon}

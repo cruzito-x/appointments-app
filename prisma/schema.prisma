@@ -8,161 +8,169 @@ datasource db {
 }
 
 model Role {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
-  users      User[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
   deleted_at DateTime?
+  users      User[]
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  username   String   @unique
+  id         Int       @id @default(autoincrement())
+  username   String    @unique
   password   String
-  email      String   @unique
+  email      String    @unique
   roleId     Int
-  role       Role     @relation(fields: [roleId], references: [id])
-  personal   Personal?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
   deleted_at DateTime?
+  personal   Personal?
+  role       Role      @relation(fields: [roleId], references: [id])
 }
 
 model Specialty {
-  id         Int      @id @default(autoincrement())
+  id         Int                 @id @default(autoincrement())
   name       String
-  personal   PersonalSpecialty[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime            @default(now())
+  updated_at DateTime            @updatedAt
   deleted_at DateTime?
+  personal   PersonalSpecialty[]
 }
 
 model Personal {
-  id         Int      @id @default(autoincrement())
-  userId     Int      @unique
-  user       User     @relation(fields: [userId], references: [id])
-  specialties PersonalSpecialty[]
-  reminders  Reminder[]
-  titles     AcademicTitle[]
-  appointments Appointment[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  id               Int                 @id @default(autoincrement())
+  userId           Int                 @unique
+  created_at       DateTime            @default(now())
+  updated_at       DateTime?           @updatedAt
+  deleted_at       DateTime?
+  name             String?             @db.VarChar
+  years_experience Int?
+  patients_helped  Int?
+  titles           AcademicTitle[]
+  appointments     Appointment[]
+  user             User                @relation(fields: [userId], references: [id])
+  specialties      PersonalSpecialty[]
+  reminders        Reminder[]
 }
 
 model AcademicTitle {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
   personalId Int
-  personal   Personal @relation(fields: [personalId], references: [id])
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
   deleted_at DateTime?
+  personal   Personal  @relation(fields: [personalId], references: [id])
 }
 
 model PersonalSpecialty {
-  id           Int      @id @default(autoincrement())
-  personalId   Int
-  specialtyId  Int
-  personal     Personal  @relation(fields: [personalId], references: [id])
-  specialty    Specialty @relation(fields: [specialtyId], references: [id])
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
-  deleted_at   DateTime?
+  id          Int       @id @default(autoincrement())
+  personalId  Int
+  specialtyId Int
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime?
+  personal    Personal  @relation(fields: [personalId], references: [id])
+  specialty   Specialty @relation(fields: [specialtyId], references: [id])
 }
 
 model Patient {
-  id         Int      @id @default(autoincrement())
-  firstName  String
-  lastName   String
-  birthDate  DateTime
+  id           Int           @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  birthDate    DateTime
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+  deleted_at   DateTime?
   appointments Appointment[]
-  payments   Payment[]
-  files      PatientFile[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  files        PatientFile[]
+  payments     Payment[]
 }
 
 model Appointment {
-  id         Int      @id @default(autoincrement())
+  id         Int                  @id @default(autoincrement())
   patientId  Int
   personalId Int
   date       DateTime
   status     String
-  patient    Patient  @relation(fields: [patientId], references: [id])
-  personal   Personal @relation(fields: [personalId], references: [id])
-  history    AppointmentHistory[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime             @default(now())
+  updated_at DateTime             @updatedAt
   deleted_at DateTime?
+  patient    Patient              @relation(fields: [patientId], references: [id])
+  personal   Personal             @relation(fields: [personalId], references: [id])
+  history    AppointmentHistory[]
 }
 
 model AppointmentHistory {
-  id            Int      @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   appointmentId Int
   status        String
-  appointment   Appointment @relation(fields: [appointmentId], references: [id])
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt
   deleted_at    DateTime?
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
 }
 
 model Reminder {
-  id         Int      @id @default(autoincrement())
-  personalId Int
-  title      String
+  id          Int       @id @default(autoincrement())
+  personalId  Int
+  title       String
   description String?
-  priority   Int
-  status     String
-  date       DateTime
-  personal   Personal @relation(fields: [personalId], references: [id])
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  priority    Int
+  status      String
+  date        DateTime
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime?
+  personal    Personal  @relation(fields: [personalId], references: [id])
 }
 
 model Payment {
-  id         Int      @id @default(autoincrement())
+  id         Int             @id @default(autoincrement())
   patientId  Int
   amount     Float
   date       DateTime
-  patient    Patient  @relation(fields: [patientId], references: [id])
-  details    PaymentDetail[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime        @default(now())
+  updated_at DateTime        @updatedAt
   deleted_at DateTime?
+  patient    Patient         @relation(fields: [patientId], references: [id])
+  details    PaymentDetail[]
 }
 
 model PaymentDetail {
-  id         Int      @id @default(autoincrement())
-  paymentId  Int
+  id          Int       @id @default(autoincrement())
+  paymentId   Int
   description String
-  amount     Float
-  payment    Payment @relation(fields: [paymentId], references: [id])
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  amount      Float
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime?
+  payment     Payment   @relation(fields: [paymentId], references: [id])
 }
 
 model PatientFile {
-  id         Int      @id @default(autoincrement())
-  patientId  Int
-  patient    Patient  @relation(fields: [patientId], references: [id])
-  details    PatientFileDetail[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  id                  Int                 @id @default(autoincrement())
+  patientId           Int
+  created_at          DateTime            @default(now())
+  updated_at          DateTime?           @updatedAt
+  deleted_at          DateTime?
+  emergency_contact_1 String?             @db.VarChar(9)
+  emergency_contact_2 String?             @db.VarChar(9)
+  occupation          String?             @db.VarChar(100)
+  institution         String?             @db.VarChar(100)
+  sex                 String?             @db.Char
+  patient             Patient             @relation(fields: [patientId], references: [id])
+  details             PatientFileDetail[]
 }
 
 model PatientFileDetail {
-  id         Int      @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   patientFileId Int
-  filePath   String
-  description String?
-  patientFile PatientFile @relation(fields: [patientFileId], references: [id])
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  filePath      String
+  description   String?
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt
+  deleted_at    DateTime?
+  patientFile   PatientFile @relation(fields: [patientFileId], references: [id])
 }
