@@ -16,6 +16,7 @@ const File = () => {
     const patientsData = await response.json();
 
     setPatients(patientsData);
+    console.log(patientsData);
 
     return patients;
   };
@@ -46,7 +47,7 @@ const File = () => {
                   <CiFolderOn size={15} className="text-blue-500" />
                 </div>
                 <label className="text-gray-500 text-xs font-normal ml-1">
-                  Ficha #000000001
+                  Ficha #{String(patient.id).padStart(9, "0")}
                 </label>
               </div>
             </div>
@@ -56,7 +57,7 @@ const File = () => {
               Sexo:{" "}
             </label>
             <label className="text-end text-black text-xs font-normal">
-              {patient.gender}
+              {patient.files?.length > 0 ? patient.files[0].sex : "N/A"}
             </label>
           </div>
           <div className="flex justify-between mb-1">
@@ -64,7 +65,7 @@ const File = () => {
               Ocupación:
             </label>
             <label className="text-end text-black text-xs">
-              {patient.occupation}
+              {patient.files?.length > 0 ? patient.files[0].occupation : "N/A"}
             </label>
           </div>
           <div className="flex justify-between mb-1">
@@ -72,7 +73,7 @@ const File = () => {
               Institución:
             </label>
             <label className="text-end text-black text-xs">
-              {patient.institution}
+              {patient.files?.length > 0 ? patient.files[0].institution : "N/A"}
             </label>
           </div>
           <div className="flex justify-between mb-1">
@@ -80,7 +81,9 @@ const File = () => {
               Contacto de emergencia:
             </label>
             <label className="text-end text-black text-xs font-normal">
-              {patient.emergency_contact}
+              {patient.files?.length > 0
+                ? patient.files[0].emergency_contact_1
+                : "N/A"}
             </label>
           </div>
           <div className="items-start">
