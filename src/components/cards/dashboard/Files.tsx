@@ -1,9 +1,9 @@
-import SeeMore from "@/components/buttons/seeMore/seeMore";
+import SeeMore from "@/components/buttons/seeMore/SeeMore";
 import { CiFolderOn } from "react-icons/ci";
 
 const Files = () => {
   return (
-    <div className="block w-full h-auto p-6 my-5 bg-white  border-slate-200 shadow-xl rounded-xl">
+    <div className="block w-full h-auto p-6 my-5 bg-white border-slate-200 shadow-xl rounded-xl">
       <div className="flex items-center">
         <CiFolderOn size={22} className="text-blue-900" />
         <h2 className="text-sm font-semibold text-blue-900 ml-1">
@@ -25,7 +25,7 @@ const Files = () => {
           <p className="px-2 text-xs text-gray-600">
             Expediente: 1234567890 <br />
             Dr. Asignado: Dr. Mendoza <br />
-            Próxima cita: 15/03/26
+            Primera cita: 15/03/26
           </p>
         </div>
 
@@ -43,7 +43,7 @@ const Files = () => {
           <p className="px-2 text-xs text-gray-600">
             Expediente: 1234567890 <br />
             Dr. Asignado: Dr. Mendoza <br />
-            Próxima cita: 15/03/26
+            Primera cita: 15/03/26
           </p>
         </div>
 
@@ -61,12 +61,12 @@ const Files = () => {
           <p className="px-2 text-xs text-gray-600">
             Expediente: 1234567890 <br />
             Dr. Asignado: Dr. Mendoza <br />
-            Próxima cita: 15/03/26
+            Primera cita: 15/03/26
           </p>
         </div>
 
         <div className="items-start px-2">
-          <SeeMore url="/files" label="Ver todos" />
+          <SeeMore link="/files" label="Ver todos" />
         </div>
       </div>
     </div>

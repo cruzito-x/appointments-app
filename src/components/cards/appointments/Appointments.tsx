@@ -1,4 +1,4 @@
-import SeeMore from "@/components/buttons/seeMore/seeMore";
+import SeeMore from "@/components/buttons/seeMore/SeeMore";
 import { CiCalendar, CiClock2, CiMedicalMask } from "react-icons/ci";
 
 const Appointments = () => {
@@ -34,7 +34,7 @@ const Appointments = () => {
           </h2>
         </div>
 
-        <SeeMore url="#" label="Ver detalles" />
+        <SeeMore link="#" label="Ver detalles" />
       </div>
     </div>
   );

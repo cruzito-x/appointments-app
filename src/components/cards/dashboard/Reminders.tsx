@@ -1,4 +1,4 @@
-import SeeMore from "@/components/buttons/seeMore/seeMore";
+import SeeMore from "@/components/buttons/seeMore/SeeMore";
 import { CiFlag1 } from "react-icons/ci";
 
 const Reminders = () => {
@@ -95,7 +95,7 @@ const Reminders = () => {
         </div>
 
         <div className="items-start px-2">
-          <SeeMore url="/reminders" label="Ver todos" />
+          <SeeMore link="/reminders" label="Ver todos" />
         </div>
       </div>
     </div>

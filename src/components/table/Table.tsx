@@ -2,7 +2,7 @@ import DataTable from "react-data-table-component";
 import styled from "styled-components";
 import Loading from "../loading/Loading";
 
-const Table = ({ columns, data }) => {
+const Table = ({ columns, data, length }) => {
   const StyledDataTable = styled(DataTable)`
     .rdt_Table {
       border-collapse: collapse !important;
@@ -58,7 +58,7 @@ const Table = ({ columns, data }) => {
       columns={columns}
       data={data}
       pagination
-      paginationPerPage={10}
+      paginationPerPage={length}
       paginationComponentOptions={{
         rowsPerPageText: "",
         rangeSeparatorText: "de",

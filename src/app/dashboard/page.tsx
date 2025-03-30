@@ -12,6 +12,8 @@ import { CiMedicalCross, CiWavePulse1 } from "react-icons/ci";
 import Reminders from "@/components/cards/dashboard/Reminders";
 import Appointments from "@/components/cards/dashboard/Appointments";
 import Files from "@/components/cards/dashboard/Files";
+import Personal from "@/components/cards/dashboard/Personal";
+import Reviews from "@/components/cards/dashboard/Reviews";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -189,7 +191,7 @@ export default function DashboardPage() {
         <div className="w-3/4 p-3.5 overflow-y-auto">
           <div className="bg-white p-3.5 rounded-xl">
             <div className="text-left mb-3 ml-0.5">
-              <h2 className="text-lg font-semibold text-black">Citas</h2>
+              <h2 className="text-lg font-semibold text-blue-900">Citas</h2>
               <p className="text-sm text-gray-500">
                 Administra tus citas con un simple clic.
               </p>
@@ -200,24 +202,43 @@ export default function DashboardPage() {
           <hr className="border-1 border-slate-400 my-6 w-3/4" />
           <div className="bg-white rounded-xl p-3 shadow-xl">
             <div className="text-left my-3 ml-0.5">
-              <h2 className="text-lg font-semibold text-black">Pacientes</h2>
+              <h2 className="text-lg font-semibold text-blue-900">Pacientes</h2>
               <p className="text-sm text-gray-500">
                 Administra la información de tus pacientes.
               </p>
             </div>
-            <Table columns={patientsColumns} data={patientsData} />
+            <Table columns={patientsColumns} data={patientsData} length={6} />
           </div>
 
           <hr className="border-1 border-slate-400 my-6 w-full" />
 
-          <div className="bg-white rounded-xl p-3 shadow-xl mb-5">
-            <div className="text-left my-3 ml-0.5">
-              <h2 className="text-lg font-semibold text-black">Doctores</h2>
-              <p className="text-sm text-gray-500">
-                Administra y gestiona las actividades del personal.
-              </p>
+          <div className="flex space-x-5">
+            <div className="w-3/5">
+              <div className="bg-white rounded-xl p-3 shadow-xl mb-5">
+                <div className="text-left my-3 ml-0.5">
+                  <h2 className="text-lg font-semibold text-blue-900">
+                    Personal
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Administra y gestiona al personal.
+                  </p>
+                </div>
+                <Personal />
+              </div>
             </div>
-            <Table columns={doctorsColumns} data={doctorsData} />
+            <div className="w-2/5">
+              <div className="bg-white rounded-xl p-3 shadow-xl mb-5">
+                <div className="text-left my-3 ml-0.5">
+                  <h2 className="text-lg font-semibold text-blue-900">
+                    Reviews
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Administra tus reviews y comentarios.
+                  </p>
+                </div>
+                <Reviews />
+              </div>
+            </div>
           </div>
         </div>
         <div className="w-1/4 p-3.5">
@@ -247,7 +268,7 @@ export default function DashboardPage() {
               <div className="flex items-center">
                 <CiMedicalCross size={22} className="text-blue-900" />
                 <h2 className="text-sm font-semibold text-blue-900 ml-1">
-                  Top 5 Doctores
+                  Top 5 doctores
                 </h2>
               </div>
               <DoughnutChart />

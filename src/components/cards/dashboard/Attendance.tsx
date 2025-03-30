@@ -1,11 +1,11 @@
 const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
 
-const Attendance = ({ patientsPerDay }: any) => {
+const Attendance = ({ patientsPerDay }) => {
   const maxPatients: number = Math.max(...Object.values(patientsPerDay));
 
   return (
     <>
-      <label className="text-normal text-sm text-blue-900 font-semibold">
+      <label className="text-normal text-xs text-blue-900 font-semibold">
         Últimos 7 días
       </label>
       <div className="flex gap-4 mt-3 bg-white justify-center">
