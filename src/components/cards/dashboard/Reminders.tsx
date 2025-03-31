@@ -1,7 +1,10 @@
 import SeeMore from "@/components/buttons/seeMore/SeeMore";
+import useReminders from "@/functions/dashboard/dashboard";
 import { CiFlag1 } from "react-icons/ci";
 
 const Reminders = () => {
+  const reminders = useReminders();
+
   return (
     <div className="block w-full h-auto p-6 my-5 bg-white border-slate-200 shadow-xl rounded-xl">
       <div className="flex items-center">
@@ -16,32 +19,59 @@ const Reminders = () => {
         </span>
       </div>
       <div className="space-y-2 mt-3">
-        <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
-          <div className="flex items-center justify-between px-2">
-            <label className="text-sm font-bold text-blue-700">08:30 AM</label>
-            <div className="flex items-center">
-              <div className="rounded-full p-1 bg-red-500"></div>
-              <label className="text-xs font-bold ml-1 text-black">Alta</label>
+        {reminders.length > 0 ? (
+          reminders.map((reminder, index) => (
+            <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
+              <div className="flex items-center justify-between px-2">
+                <span className="text-sm font-bold text-blue-700">
+                  {reminder.title}
+                  <label className="text-xs font-semibold">
+                    {" | "}
+                    {reminder.hour}
+                  </label>
+                </span>
+                <div className="flex items-center">
+                  <div
+                    className={`rounded-full p-1 ${
+                      reminder.priority === 1
+                        ? "bg-red-500"
+                        : reminder.priority === 2
+                        ? "bg-yellow-500"
+                        : "bg-green-500"
+                    }`}
+                  ></div>
+                  <label className="text-xs font-bold ml-1 text-black">
+                    {reminder.priority === 1
+                      ? "Alta"
+                      : reminder.priority === 2
+                      ? "Media"
+                      : "Baja"}
+                  </label>
+                </div>
+              </div>
+              <p className="px-2 text-xs text-gray-600">
+                {reminder.description}
+              </p>
+              <div className="px-2 mt-2 flex justify-between">
+                <div className="w-1/2 mr-1.5">
+                  <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
+                    Completado
+                  </button>
+                </div>
+                <div className="w-1/2 ml-1.5">
+                  <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white">
+                    Cancelar
+                  </button>
+                </div>
+              </div>
             </div>
+          ))
+        ) : (
+          <div className="flex items-center justify-center text-center text-gray-600">
+            No hay recordatorios disponibles
           </div>
-          <p className="px-2 text-xs text-gray-600">
-            Ordenar expedientes de los pacientes del Dr. Gómez en orden
-            alfabético.
-          </p>
-          <div className="px-2 mt-2 flex justify-between">
-            <div className="w-1/2 mr-1.5">
-              <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
-                Completado
-              </button>
-            </div>
-            <div className="w-1/2 ml-1.5">
-              <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white">
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-
+        )}
+        {/* 
         <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
           <div className="flex items-center justify-between px-2">
             <label className="text-sm font-bold text-blue-700">08:30 AM</label>
@@ -92,7 +122,7 @@ const Reminders = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="items-start px-2">
           <SeeMore link="/reminders" label="Ver todos" />
