@@ -1,5 +1,5 @@
 import Image from "next/image";
-import doctor from "@/assets/images/logo.png";
+import doctor from "@/assets/images/doctor1.png";
 import {
   CiHeart,
   CiLollipop,
@@ -39,8 +39,8 @@ const Profile = () => {
           className="block w-72 p-6 bg-white border shadow-lg rounded-xl cursor-pointer"
         >
           <div className="flex items-center justify-center">
-            <div className="rounded w-2/5 bg-blue-500 p-3.5">
-              <Image src={doctor} width={80} height={80} alt="Profile Photo" />
+            <div className="rounded w-2/5 bg-blue-500">
+              <Image className="w-24 h-24" src={doctor} alt="Profile Photo" />
             </div>
             <div className="w-3/5 ml-2">
               <div className="flex mb-1">
