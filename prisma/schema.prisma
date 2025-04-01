@@ -81,7 +81,7 @@ model Patient {
   lastName     String
   birthDate    DateTime
   created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
+  updated_at   DateTime?     @updatedAt
   deleted_at   DateTime?
   appointments Appointment[]
   files        PatientFile[]
@@ -170,7 +170,7 @@ model PatientFileDetail {
   filePath      String
   description   String?
   created_at    DateTime    @default(now())
-  updated_at    DateTime    @updatedAt
+  updated_at    DateTime?   @updatedAt
   deleted_at    DateTime?
   patientFile   PatientFile @relation(fields: [patientFileId], references: [id])
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import moment from "moment";
 
 export async function GET() {
   try {
@@ -25,7 +26,7 @@ export async function GET() {
         occupation: file.occupation,
         institution: file.institution,
         sex: file.sex,
-        created_at: file.created_at,
+        created_at: moment(file.created_at).format("DD/MM/YYYY"),
         updated_at: file.updated_at,
         details: file.details.map((detail) => ({
           id: detail.id,

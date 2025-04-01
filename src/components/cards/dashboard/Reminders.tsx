@@ -1,4 +1,5 @@
 import SeeMore from "@/components/buttons/seeMore/SeeMore";
+import NoData from "@/components/results/noData/NoData";
 import useReminders from "@/functions/dashboard/dashboard";
 import { CiFlag1 } from "react-icons/ci";
 
@@ -20,113 +21,61 @@ const Reminders = () => {
       </div>
       <div className="space-y-2 mt-3">
         {reminders.length > 0 ? (
-          reminders.map((reminder, index) => (
-            <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
-              <div className="flex items-center justify-between px-2">
-                <span className="text-sm font-bold text-blue-700">
-                  {reminder.title}
-                  <label className="text-xs font-semibold">
-                    {" | "}
-                    {reminder.hour}
-                  </label>
-                </span>
-                <div className="flex items-center">
-                  <div
-                    className={`rounded-full p-1 ${
-                      reminder.priority === 1
-                        ? "bg-red-500"
+          <>
+            {reminders.map((reminder, index) => (
+              <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
+                <div className="flex items-center justify-between px-2">
+                  <span className="text-sm font-bold text-blue-700">
+                    {reminder.title}
+                    <label className="text-xs font-semibold">
+                      {" | "}
+                      {reminder.hour}
+                    </label>
+                  </span>
+                  <div className="flex items-center">
+                    <div
+                      className={`rounded-full p-1 ${
+                        reminder.priority === 1
+                          ? "bg-red-500"
+                          : reminder.priority === 2
+                          ? "bg-yellow-500"
+                          : "bg-green-500"
+                      }`}
+                    ></div>
+                    <label className="text-xs font-bold ml-1 text-black">
+                      {reminder.priority === 1
+                        ? "Alta"
                         : reminder.priority === 2
-                        ? "bg-yellow-500"
-                        : "bg-green-500"
-                    }`}
-                  ></div>
-                  <label className="text-xs font-bold ml-1 text-black">
-                    {reminder.priority === 1
-                      ? "Alta"
-                      : reminder.priority === 2
-                      ? "Media"
-                      : "Baja"}
-                  </label>
+                        ? "Media"
+                        : "Baja"}
+                    </label>
+                  </div>
+                </div>
+                <p className="px-2 text-xs text-gray-600">
+                  {reminder.description}
+                </p>
+                <div className="px-2 mt-2 flex justify-between">
+                  <div className="w-1/2 mr-1.5">
+                    <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
+                      Completado
+                    </button>
+                  </div>
+                  <div className="w-1/2 ml-1.5">
+                    <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white">
+                      Cancelar
+                    </button>
+                  </div>
                 </div>
               </div>
-              <p className="px-2 text-xs text-gray-600">
-                {reminder.description}
-              </p>
-              <div className="px-2 mt-2 flex justify-between">
-                <div className="w-1/2 mr-1.5">
-                  <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
-                    Completado
-                  </button>
-                </div>
-                <div className="w-1/2 ml-1.5">
-                  <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white">
-                    Cancelar
-                  </button>
-                </div>
-              </div>
+            ))}
+
+            <div className="items-start px-2">
+              <SeeMore link="/reminders" label="Ver todos" />
             </div>
-          ))
+          </>
         ) : (
-          <div className="flex items-center justify-center text-center text-gray-600">
-            No hay recordatorios disponibles
-          </div>
+          <NoData />
         )}
-        {/* 
-        <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
-          <div className="flex items-center justify-between px-2">
-            <label className="text-sm font-bold text-blue-700">08:30 AM</label>
-            <div className="flex items-center">
-              <div className="rounded-full p-1 bg-yellow-500"></div>
-              <label className="text-xs font-bold ml-1 text-black">Media</label>
-            </div>
-          </div>
-          <p className="px-2 text-xs text-gray-600">
-            Ordenar expedientes de los pacientes del Dr. Gómez en orden
-            alfabético.
-          </p>
-          <div className="px-2 mt-2 flex justify-between">
-            <div className="w-1/2 mr-1.5">
-              <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
-                Completado
-              </button>
-            </div>
-            <div className="w-1/2 ml-1.5">
-              <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white">
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
-          <div className="flex items-center justify-between px-2">
-            <label className="text-sm font-bold text-blue-700">08:30 AM</label>
-            <div className="flex items-center">
-              <div className="rounded-full p-1 bg-green-500"></div>
-              <label className="text-xs font-bold ml-1 text-black">Baja</label>
-            </div>
-          </div>
-          <p className="px-2 text-xs text-gray-600">
-            Ordenar expedientes de los pacientes del Dr. Gómez en orden
-            alfabético.
-          </p>
-          <div className="px-2 mt-2 flex justify-between">
-            <div className="w-1/2 mr-1.5">
-              <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300">
-                Completado
-              </button>
-            </div>
-            <div className="w-1/2 ml-1.5">
-              <button className="w-36 p-2 rounded-md bg-white text-xs font-semibold text-blue-900 border border-blue-900 hover:bg-blue-900 hover:text-white transition-all duration-300">
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div> */}
-
-        <div className="items-start px-2">
-          <SeeMore link="/reminders" label="Ver todos" />
-        </div>
       </div>
     </div>
   );
