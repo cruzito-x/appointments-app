@@ -8,8 +8,6 @@ import NoData from "@/components/results/noData/NoData";
 const File = () => {
   const patients = useFiles();
 
-  console.log(patients);
-
   return (
     <div className="grid grid-cols-5 gap-12">
       {patients.length > 0 ? (
@@ -22,7 +20,7 @@ const File = () => {
               <div className="flex items-center justify-between mb-2">
                 <div className="rounded w-2/5 bg-blue-500">
                   <Image
-                    className="w-24 h-24"
+                    className="w-full h-24"
                     src={patientPhoto}
                     alt="Profile Photo"
                   />

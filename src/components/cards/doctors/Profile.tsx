@@ -40,7 +40,7 @@ const Profile = () => {
         >
           <div className="flex items-center justify-center">
             <div className="rounded w-2/5 bg-blue-500">
-              <Image className="w-24 h-24" src={doctor} alt="Profile Photo" />
+              <Image className="w-full h-24" src={doctor} alt="Profile Photo" />
             </div>
             <div className="w-3/5 ml-2">
               <div className="flex mb-1">

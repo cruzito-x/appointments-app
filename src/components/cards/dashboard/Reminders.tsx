@@ -24,7 +24,10 @@ const Reminders = () => {
           <>
             {reminders.map((reminder, index) => (
               <div className="items-center p-3 bg-white border rounded-lg shadow-sm">
-                <div className="flex items-center justify-between px-2">
+                <div
+                  key={index}
+                  className="flex items-center justify-between px-2"
+                >
                   <span className="text-sm font-bold text-blue-700">
                     {reminder.title}
                     <label className="text-xs font-semibold">

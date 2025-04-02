@@ -1,5 +1,6 @@
 "use client";
 
+import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 import File from "@/components/cards/patients/File";
 import Footer from "@/components/footer/Footer";
 import Loading from "@/components/loading/Loading";
@@ -7,6 +8,7 @@ import Searchbar from "@/components/searchbars/patients/Searchbar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CiMedicalMask } from "react-icons/ci";
 
 export default function PatientsPage() {
   const { data: session, status } = useSession();
@@ -25,6 +27,7 @@ export default function PatientsPage() {
 
   return (
     <>
+      <Breadcrumbs icon={<CiMedicalMask size={22} />} home="Pacientes" />
       <div className="m-2 p-3.5 bg-white rounded-md">
         <div>
           <h1 className="text-black text-lg font-semibold">Pacientes</h1>
