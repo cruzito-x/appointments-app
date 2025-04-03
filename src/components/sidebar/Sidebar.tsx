@@ -68,8 +68,10 @@ export function SidebarItem({ icon, text, link, active, onClick }) {
 
   return (
     <li
-      className={`flex items-center p-4 my-1 hover:bg-blue-500 ${
-        active ? "bg-blue-500" : ""
+      className={`flex items-center p-4 my-1 hover:bg-blue-500 hover:bg-opacity-30 ${
+        active
+          ? "bg-blue-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30"
+          : ""
       } rounded cursor-pointer`}
     >
       {link ? (

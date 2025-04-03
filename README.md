@@ -87,3 +87,132 @@ appointments-management-app
 └─ tsconfig.json
 
 ```
+
+```
+appointments-management-app
+├─ next.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20250328213111_init
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  ├─ schema.prisma
+│  └─ seed.ts
+├─ public
+│  └─ favicon.ico
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ api
+│  │  │  ├─ auth
+│  │  │  │  └─ [...nextauth]
+│  │  │  │     └─ route.ts
+│  │  │  ├─ dashboard
+│  │  │  │  └─ reminders
+│  │  │  │     └─ route.ts
+│  │  │  ├─ doctors
+│  │  │  │  └─ route.ts
+│  │  │  └─ patients
+│  │  │     ├─ details
+│  │  │     │  └─ [id]
+│  │  │     │     └─ route.ts
+│  │  │     └─ route.ts
+│  │  ├─ appointments
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ billing
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ dashboard
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ doctors
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ globals.css
+│  │  ├─ help
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ layout.tsx
+│  │  ├─ login
+│  │  │  ├─ layout.tsx
+│  │  │  └─ page.tsx
+│  │  ├─ not-found.tsx
+│  │  ├─ page.tsx
+│  │  └─ patients
+│  │     ├─ layout.tsx
+│  │     ├─ page.tsx
+│  │     └─ patient_details
+│  │        └─ [id]
+│  │           └─ page.tsx
+│  ├─ assets
+│  │  └─ images
+│  │     ├─ doctor.webp
+│  │     ├─ doctor1.png
+│  │     ├─ empty.png
+│  │     ├─ logo.png
+│  │     ├─ paciente1.png
+│  │     └─ personal.webp
+│  ├─ components
+│  │  ├─ breadcrumbs
+│  │  │  └─ Breadcrumbs.tsx
+│  │  ├─ buttons
+│  │  │  └─ seeMore
+│  │  │     └─ SeeMore.tsx
+│  │  ├─ cards
+│  │  │  ├─ appointments
+│  │  │  │  └─ Appointments.tsx
+│  │  │  ├─ dashboard
+│  │  │  │  ├─ Appointments.tsx
+│  │  │  │  ├─ Attentions.tsx
+│  │  │  │  ├─ Files.tsx
+│  │  │  │  ├─ Personal.tsx
+│  │  │  │  ├─ Reminders.tsx
+│  │  │  │  └─ Reviews.tsx
+│  │  │  ├─ doctors
+│  │  │  │  └─ Profile.tsx
+│  │  │  └─ patients
+│  │  │     └─ File.tsx
+│  │  ├─ charts
+│  │  │  └─ dashboard
+│  │  │     ├─ DoughnutChart.tsx
+│  │  │     ├─ HorizontalBarChart.tsx
+│  │  │     └─ PieChart.tsx
+│  │  ├─ footer
+│  │  │  └─ Footer.tsx
+│  │  ├─ header
+│  │  │  └─ Header.tsx
+│  │  ├─ loading
+│  │  │  └─ Loading.tsx
+│  │  ├─ modals
+│  │  │  └─ appointments
+│  │  │     └─ AppointmentDetails.tsx
+│  │  ├─ results
+│  │  │  └─ noData
+│  │  │     └─ NoData.tsx
+│  │  ├─ searchbars
+│  │  │  ├─ appointments
+│  │  │  │  └─ Searchbar.tsx
+│  │  │  ├─ doctors
+│  │  │  │  └─ Searchbar.tsx
+│  │  │  └─ patients
+│  │  │     └─ Searchbar.tsx
+│  │  ├─ sidebar
+│  │  │  ├─ Items.tsx
+│  │  │  └─ Sidebar.tsx
+│  │  └─ table
+│  │     └─ Table.tsx
+│  ├─ functions
+│  │  ├─ dashboard
+│  │  │  └─ dashboard.tsx
+│  │  └─ patients
+│  │     └─ patients.tsx
+│  └─ lib
+│     └─ prisma.ts
+├─ tailwind.config.ts
+└─ tsconfig.json
+
+```

@@ -5,18 +5,20 @@ import Footer from "@/components/footer/Footer";
 import { useFileDetails } from "@/functions/patients/patients";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { CiBandage, CiMedicalClipboard, CiMedicalMask } from "react-icons/ci";
+import {
+  CiBeaker1,
+  CiCalendar,
+  CiCreditCard2,
+  CiFileOn,
+  CiImageOn,
+  CiPhone,
+  CiStethoscope,
+} from "react-icons/ci";
 import patientPhoto from "@/assets/images/paciente1.png";
-import NoData from "@/components/results/noData/NoData";
+import Link from "next/link";
 
 export const PatientDetailsPage = () => {
-  const tabs = ["Detalles personales", "Padecimientos", "Historial médico"];
-  const links = ["#personal_details", "#conditions", "#med_history"];
   const pathname = usePathname();
-
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [selectedLink, setSelectedLink] = useState(links[0]);
   const id = parseInt(pathname.split("/").pop());
   const fileDetails = useFileDetails(id);
 
@@ -29,153 +31,258 @@ export const PatientDetailsPage = () => {
         titleLink="/patients"
         subtitle="Detalles de Paciente"
       />
-      <div className="m-2 p-3.5 bg-white rounded-md h-5/6">
+      <div className="m-2 p-3.5 bg-white rounded-md h-auto">
         <div>
-          <h1 className="text-black text-2xl font-bold">{fileDetails.name}</h1>
+          <h1 className="text-black text-2xl font-bold">Perfil de Paciente</h1>
           <label className="text-gray-600 text-sm font-normal">
             Ficha de Información personal y médica.
           </label>
         </div>
-
-        <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-300">
-          <ul className="flex flex-wrap -mb-px">
-            {tabs.map((tab, index) => (
-              <li key={tab} className="me-2">
-                <a
-                  href={links[index]}
-                  className={`inline-block pt-4 pb-4 pe-4 border-b-2 rounded-t-lg ${
-                    activeTab === tab
-                      ? "text-blue-500 border-blue-500"
-                      : "border-transparent"
-                  }`}
-                  onClick={() => {
-                    setActiveTab(tab);
-                    setSelectedLink(links[index]);
-                  }}
-                >
-                  {tab}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div
-          className={`mt-4 ${
-            selectedLink === "#personal_details" ? "" : "hidden"
-          }`}
-          id="personal_details"
-        >
-          <div className="flex">
-            <Image
-              className="w-64 h-64"
-              // src={fileDetails?.files?.[0]?.details?.filePath}
-              src={patientPhoto}
-              alt={`${fileDetails.name} photo`}
-            />
-            <div className="ml-4 space-y-3">
-              {/* <h1 className="text-black text-2xl font-bold">
-                {fileDetails.name}
-              </h1> */}
-              <p className="text-gray-600 text-sm font-normal">
-                Fecha de nacimiento:{" "}
-                <label className="text-black"> {fileDetails.birthDate} </label>
-              </p>
-              <p className="text-gray-600 text-sm font-normal">
-                Sexo:{" "}
-                {fileDetails?.files?.[0]?.sex === "M" ? (
-                  <label className="text-black">Masculino</label>
-                ) : (
-                  <label className="text-black">Femenino</label>
-                )}
-              </p>
-              <p className="text-gray-600 text-sm font-normal">
-                Ocupación:{" "}
-                <label className="text-black">
+        <div className="flex space-y-4 space-x-4">
+          <div className="w-2/5">
+            <div className="mt-4 border rounded-xl p-5">
+              <div className="flex">
+                <div className="flex items-center space-x-3">
+                  <Image
+                    className="w-16 h-16 rounded-full shadow-2xl"
+                    // src={fileDetails?.files?.[0]?.details?.filePath}
+                    src={patientPhoto}
+                    alt={`${fileDetails.name} photo`}
+                  />
+                  <h1 className="text-black text-xl font-bold">
+                    {fileDetails.name}
+                  </h1>
+                </div>
+              </div>
+              <div className="text-left my-4">
+                <h2 className="text-gray-600 font-semibold text-sm">
                   {" "}
-                  {fileDetails?.files?.[0]?.occupation}{" "}
-                </label>
-              </p>
-              <p className="text-gray-600 text-sm font-normal">
-                Institución:{" "}
-                <label className="text-black">
-                  {fileDetails?.files?.[0]?.institution}
-                </label>
-              </p>
-              <p className="text-gray-600 text-sm font-normal">
-                Médico asignado:{" "}
-                <label className="text-black">
-                  Dr. Gregorio Manuel Casas Arce
-                </label>
-              </p>
-              <p className="text-gray-600 text-sm font-normal">
-                Registrado por primera vez:{" "}
-                <label className="text-black">{fileDetails.created_at}</label>
-              </p>
-              <p className="text-gray-600 text-sm font-normal">
-                Expediente creado el:{" "}
-                <label className="text-black">
-                  {fileDetails?.files?.[0]?.created_at}
-                </label>
-              </p>
+                  Información general{" "}
+                </h2>
+                <div className="mt-2 text-sm font-normal">
+                  <div className="space-y-3">
+                    {fileDetails?.files?.[0]?.emergency_contact_1 && (
+                      <div className="flex items-center text-blue-900">
+                        <CiPhone size={20} className="mr-1" />
+                        <label className="text-gray-500 text-xs font-medium">
+                          {fileDetails?.files?.[0]?.emergency_contact_1} (Juan,
+                          Amigo)
+                        </label>
+                      </div>
+                    )}
+                    {fileDetails?.files?.[0]?.emergency_contact_2 && (
+                      <div className="flex items-center text-blue-900">
+                        <CiPhone size={20} className="mr-1" />
+                        <label className="text-gray-500 text-xs font-medium">
+                          {fileDetails?.files?.[0]?.emergency_contact_2} (Jorge,
+                          Amigo)
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 border rounded-xl p-5">
+              <div className="flex">
+                <div className="flex items-center space-x-3">
+                  <h1 className="text-black text-xl font-bold">
+                    Últimos resultados de laboratorio
+                  </h1>
+                </div>
+              </div>
+              <div className="my-4 space-y-4">
+                <div className="flex items-center space-x-3">
+                  <CiImageOn size={30} className="text-green-500" />
+                  <p className="text-black text-sm font-medium">
+                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
+                    <label className="text-xs text-gray-500">
+                      {" "}
+                      Subido el: 27/12/2021
+                    </label>
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <CiImageOn size={30} className="text-green-500" />
+                  <p className="text-black text-sm font-medium">
+                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
+                    <label className="text-xs text-gray-500">
+                      {" "}
+                      Subido el: 27/12/2021{" "}
+                    </label>
+                  </p>
+                </div>
+
+                <div className="flex items-center space-x-3">
+                  <CiFileOn size={30} className="text-red-500" />
+                  <p className="text-black text-sm font-medium">
+                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
+                    <label className="text-xs text-gray-500">
+                      {" "}
+                      Subido el: 27/12/2021
+                    </label>
+                  </p>
+                </div>
+
+                <div className="flex items-center space-x-3">
+                  <CiImageOn size={30} className="text-green-500" />
+                  <p className="text-black text-sm font-medium">
+                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
+                    <label className="text-xs text-gray-500">
+                      {" "}
+                      Subido el: 27/12/2021{" "}
+                    </label>
+                  </p>
+                </div>
+
+                <div className="flex items-center space-x-3">
+                  <CiImageOn size={30} className="text-green-500" />
+                  <p className="text-black text-sm font-medium">
+                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
+                    <label className="text-xs text-gray-500">
+                      {" "}
+                      Subido el: 27/12/2021{" "}
+                    </label>
+                  </p>
+                </div>
+
+                <div className="flex justify-start items-center space-x-3">
+                  <button className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300">
+                    Subir archivo
+                  </button>
+                  <Link
+                    href={`/lab_results/patient/${id}`}
+                    className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
+                  >
+                    Ver todos
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <div className="w-4/5">
+            <div className="border rounded-xl p-5">
+              <h1 className="text-black text-xl font-bold">
+                Información Personal
+              </h1>
 
-        <div
-          className={`mt-4 ${selectedLink === "#conditions" ? "" : "hidden"}`}
-          id="conditions"
-        >
-          <label className="text-gray-600 text-sm font-normal">
-            Condiciones médicas registradas:
-          </label>
-
-          <div className="flex items-center mt-3">
-            <h2 className="text-gray-600 text-sm font-normal ml-1">
-              {fileDetails?.files?.[0]?.details?.length > 0 ? (
-                <div className="space-y-2">
-                  {fileDetails?.files?.[0]?.details?.map((detail, index) =>
-                    detail.description.split(",").map((condition, subIndex) => (
-                      <p
-                        className="flex items-center"
-                        key={`${index}-${subIndex}`}
-                      >
-                        <CiBandage
-                          size={30}
-                          className="text-gray-600 mr-1 -rotate-45"
-                        />
-                        {condition.trim()}
-                      </p>
-                    ))
-                  )}
+              <div className="grid grid-cols-3 gap-3 my-4">
+                <div className="flex items-center space-x-3">
+                  <div>
+                    <p className="text-gray-600 font-semibold text-sm">
+                      Género:
+                    </p>
+                    <label className="text-black font-semibold text-xs">
+                      {fileDetails?.files?.[0]?.sex === "M"
+                        ? "Masculino"
+                        : "Femenino"}
+                    </label>
+                  </div>
                 </div>
-              ) : (
-                <p className="text-gray-600 text-sm">
-                  No hay condiciones médicas registradas para este paciente.
-                </p>
-              )}
-            </h2>
-          </div>
-        </div>
+                <div>
+                  <p className="text-gray-600 font-semibold text-sm">
+                    Fecha de nacimiento
+                  </p>
+                  <label className="text-black font-semibold text-xs">
+                    {fileDetails?.birthDate}
+                  </label>
+                </div>
+                <div>
+                  <p className="text-gray-600 font-semibold text-sm">
+                    Ocupación
+                  </p>
+                  <label className="text-black font-semibold text-xs">
+                    {fileDetails?.files?.[0].occupation} en{" "}
+                    {fileDetails?.files?.[0].institution}
+                  </label>
+                </div>
 
-        <div
-          className={`mt-4 ${selectedLink === "#med_history" ? "" : "hidden"}`}
-          id="med_history"
-        >
-          {fileDetails.length > 0 ? (
-            <>
-              {fileDetails.map((file, index) => (
-                <div
-                  key={index}
-                  className="block w-full p-6 bg-white border shadow-lg rounded-xl cursor-pointer"
-                ></div>
-              ))}
-            </>
-          ) : (
-            <p className="text-gray-600 text-sm">
-              No existe historial médico de este paciente.
-            </p>
-          )}
+                <div>
+                  <p className="text-gray-600 font-semibold text-sm">
+                    Última cita
+                  </p>
+                  <label className="text-black font-semibold text-xs">
+                    {fileDetails?.files?.[0].updated_at} Hola
+                  </label>
+                </div>
+
+                <div>
+                  <p className="text-gray-600 font-semibold text-sm">
+                    Próxima cita
+                  </p>
+                  <label className="text-black font-semibold text-xs">
+                    {fileDetails?.files?.[0].updated_at} Tralalero Tralala
+                  </label>
+                </div>
+
+                <div>
+                  <p className="text-gray-600 font-semibold text-sm">
+                    Alergias
+                  </p>
+                  <label className="text-black font-semibold text-xs">
+                    {fileDetails?.files?.[0]?.details?.[0]?.description}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 border rounded-xl p-5">
+              <div className="grid grid-cols-2 gap-4">
+                <Link href={`/appointments/${id}`}>
+                  <div className="border rounded-xl p-5 hover:bg-blue-300 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-blue-300 rounded-full p-3">
+                        <CiCalendar size={22} className="text-blue-900" />
+                      </div>
+                      <label className="font-semibold text-lg cursor-pointer">
+                        Citas
+                      </label>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link href={`/patient_doctors/${id}`}>
+                  <div className="border rounded-xl p-5 hover:bg-blue-300 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-blue-300 rounded-full p-3">
+                        <CiStethoscope size={22} className="text-blue-900" />
+                      </div>
+                      <label className="font-semibold text-lg cursor-pointer">
+                        Doctores
+                      </label>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link href={`/lab_results/patient/${id}`}>
+                  <div className="border rounded-xl p-5 hover:bg-blue-300 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-blue-300 rounded-full p-3">
+                        <CiBeaker1 size={22} className="text-blue-900" />
+                      </div>
+                      <label className="font-semibold text-lg cursor-pointer">
+                        Pruebas y Resultados
+                      </label>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link href={`/payments_historial/${id}`}>
+                  <div className="border rounded-xl p-5 hover:bg-blue-300 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-blue-300 rounded-full p-3">
+                        <CiCreditCard2 size={22} className="text-blue-900" />
+                      </div>
+                      <label className="font-semibold text-lg cursor-pointer">
+                        Cuentas
+                      </label>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
