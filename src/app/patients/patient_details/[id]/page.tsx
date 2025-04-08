@@ -44,7 +44,7 @@ export const PatientDetailsPage = () => {
               <div className="flex">
                 <div className="flex items-center space-x-3">
                   <Image
-                    className="w-16 h-16 rounded-full shadow-2xl"
+                    className="w-16 h-16 rounded-2xl shadow-2xl object-cover"
                     // src={fileDetails?.files?.[0]?.details?.filePath}
                     src={patientPhoto}
                     alt={`${fileDetails.name} photo`}
@@ -203,7 +203,7 @@ export const PatientDetailsPage = () => {
                     Última cita
                   </p>
                   <label className="text-black font-semibold text-xs">
-                    {fileDetails?.files?.[0].updated_at} Hola
+                    {fileDetails?.files?.[0]?.details?.[0].last_appointment}
                   </label>
                 </div>
 
@@ -212,7 +212,7 @@ export const PatientDetailsPage = () => {
                     Próxima cita
                   </p>
                   <label className="text-black font-semibold text-xs">
-                    {fileDetails?.files?.[0].updated_at} Tralalero Tralala
+                    {fileDetails?.files?.[0]?.details?.[0].next_appointment}
                   </label>
                 </div>
 
@@ -228,8 +228,11 @@ export const PatientDetailsPage = () => {
             </div>
 
             <div className="mt-4 border rounded-xl p-5">
-              <div className="grid grid-cols-2 gap-4">
-                <Link href={`/appointments/${id}`}>
+              <h1 className="text-black text-xl font-bold">
+                Información de Paciente
+              </h1>
+              <div className="grid grid-cols-2 gap-4 my-4">
+                <Link href={`/patients/patient/appointments/${id}`}>
                   <div className="border rounded-xl p-5 hover:bg-blue-300 transition-all duration-300">
                     <div className="flex items-center space-x-3">
                       <div className="bg-blue-300 rounded-full p-3">

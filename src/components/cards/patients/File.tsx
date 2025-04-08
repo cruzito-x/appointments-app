@@ -18,9 +18,9 @@ const File = () => {
               className="block w-full p-6 bg-white border shadow-lg rounded-xl cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
-                <div className="rounded w-2/5 bg-blue-500">
+                <div className="rounded-full w-2/5">
                   <Image
-                    className="w-full h-24"
+                    className="w-full h-24 rounded-2xl shadow-2xl object-cover"
                     src={patientPhoto}
                     alt="Profile Photo"
                   />

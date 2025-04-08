@@ -41,8 +41,8 @@ const Reminders = () => {
                         reminder.priority === 1
                           ? "bg-red-500"
                           : reminder.priority === 2
-                          ? "bg-yellow-500"
-                          : "bg-green-500"
+                          ? "bg-orange-500"
+                          : "bg-yellow-500"
                       }`}
                     ></div>
                     <label className="text-xs font-bold ml-1 text-black">

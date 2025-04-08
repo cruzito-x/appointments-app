@@ -165,12 +165,14 @@ model PatientFile {
 }
 
 model PatientFileDetail {
-  id            Int         @id @default(autoincrement())
-  patientFileId Int
-  filePath      String
-  description   String?
-  created_at    DateTime    @default(now())
-  updated_at    DateTime?   @updatedAt
-  deleted_at    DateTime?
-  patientFile   PatientFile @relation(fields: [patientFileId], references: [id])
+  id               Int         @id @default(autoincrement())
+  patientFileId    Int
+  filePath         String
+  description      String?
+  created_at       DateTime    @default(now())
+  updated_at       DateTime?   @updatedAt
+  deleted_at       DateTime?
+  last_appointment DateTime?
+  next_appointment DateTime?
+  patientFile      PatientFile @relation(fields: [patientFileId], references: [id])
 }

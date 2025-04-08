@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import moment from "moment";
+import "moment/locale/es";
 
 export async function GET(req, { params }) {
   try {
@@ -31,6 +32,8 @@ export async function GET(req, { params }) {
       );
     }
 
+    moment.locale("es");
+
     const patientData = {
       id: patient.id,
       name: `${patient.firstName} ${patient.lastName}`,
@@ -50,6 +53,12 @@ export async function GET(req, { params }) {
           id: detail.id,
           filePath: detail.filePath,
           description: detail.description,
+          last_appointment: detail.last_appointment
+            ? moment(detail.last_appointment).format("LL")
+            : "N/A",
+          next_appointment: detail.next_appointment
+            ? moment(detail.next_appointment).format("LL")
+            : "N/A",
           created_at: detail.created_at,
           updated_at: detail.updated_at,
         })),
