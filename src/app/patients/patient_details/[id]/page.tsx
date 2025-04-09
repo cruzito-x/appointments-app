@@ -152,7 +152,7 @@ export const PatientDetailsPage = () => {
                     Subir archivo
                   </button>
                   <Link
-                    href={`/lab_results/patient/${id}`}
+                    href={`/patients/patient/lab_results/${id}`}
                     className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
                   >
                     Ver todos

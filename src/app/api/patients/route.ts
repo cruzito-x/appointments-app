@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import moment from "moment";
+import "moment/locale/es";
 
 export async function GET() {
   try {
@@ -13,6 +14,8 @@ export async function GET() {
         },
       },
     });
+
+    moment.locale("es");
 
     const patientsData = patients.map((patient) => ({
       id: patient.id,
@@ -32,6 +35,9 @@ export async function GET() {
           id: detail.id,
           filePath: detail.filePath,
           description: detail.description,
+          next_appointment: detail.next_appointment
+            ? moment(detail.next_appointment).format("LL")
+            : "No agendada",
           created_at: detail.created_at,
           updated_at: detail.updated_at,
         })),

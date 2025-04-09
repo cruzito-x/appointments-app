@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import moment from "moment";
 import "moment/locale/es";
 
-export async function GET(req, { params }) {
+export async function GET(req: any, { params }: any) {
   try {
     const { id } = params;
 
@@ -55,10 +55,10 @@ export async function GET(req, { params }) {
           description: detail.description,
           last_appointment: detail.last_appointment
             ? moment(detail.last_appointment).format("LL")
-            : "N/A",
+            : "No hay registro",
           next_appointment: detail.next_appointment
             ? moment(detail.next_appointment).format("LL")
-            : "N/A",
+            : "No agendada",
           created_at: detail.created_at,
           updated_at: detail.updated_at,
         })),

@@ -35,7 +35,7 @@ const Files = () => {
                 <p className="px-2 text-xs text-gray-600">
                   Expediente: #{String(file.id).padStart(9, "0")} <br />
                   Dr. Asignado: Dr. Mendoza <br />
-                  Primera cita: 15/03/26
+                  Próxima cita: {file.files[0].details[0].next_appointment}
                 </p>
               </div>
             ))}
