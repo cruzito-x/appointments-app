@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import moment from "moment";
 import "moment/locale/es";
+import LabResultsByPatient from "@/app/patients/patient/lab_results/[id]/page";
 
 export async function GET(req: any, { params }: any) {
   try {
@@ -19,7 +20,11 @@ export async function GET(req: any, { params }: any) {
       include: {
         files: {
           include: {
-            details: true,
+            details: {
+              include: {
+                LabResults: true,
+              },
+            },
           },
         },
       },
@@ -31,6 +36,20 @@ export async function GET(req: any, { params }: any) {
         { status: 404 }
       );
     }
+
+    const latestLabResults = await prisma.labResults.findMany({
+      where: {
+        PatientFileDetail: {
+          patientFile: {
+            patientId: patient.id,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+      take: 5,
+    });
 
     moment.locale("es");
 
@@ -51,7 +70,7 @@ export async function GET(req: any, { params }: any) {
         updated_at: file.updated_at,
         details: file.details.map((detail) => ({
           id: detail.id,
-          filePath: detail.filePath,
+          file_path: detail.file_path,
           description: detail.description,
           last_appointment: detail.last_appointment
             ? moment(detail.last_appointment).format("LL")
@@ -61,6 +80,19 @@ export async function GET(req: any, { params }: any) {
             : "No agendada",
           created_at: detail.created_at,
           updated_at: detail.updated_at,
+          latest_lab_results: latestLabResults.map((result) => ({
+            id: result.id,
+            file_path: result.file_path,
+            file_extension: result.file_extension,
+            file_size: result.file_size,
+            created_at: moment(result.created_at).format("LL"),
+            updated_at: result.updated_at
+              ? moment(result.updated_at).format("LL")
+              : null,
+            deleted_at: result.deleted_at
+              ? moment(result.deleted_at).format("LL")
+              : null,
+          })),
         })),
       })),
     };

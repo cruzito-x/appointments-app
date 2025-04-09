@@ -16,6 +16,7 @@ import {
 } from "react-icons/ci";
 import patientPhoto from "@/assets/images/paciente1.png";
 import Link from "next/link";
+import NoData from "@/components/results/noData/NoData";
 
 export const PatientDetailsPage = () => {
   const pathname = usePathname();
@@ -45,7 +46,7 @@ export const PatientDetailsPage = () => {
                 <div className="flex items-center space-x-3">
                   <Image
                     className="w-16 h-16 rounded-2xl shadow-2xl object-cover"
-                    // src={fileDetails?.files?.[0]?.details?.filePath}
+                    // src={fileDetails?.files?.[0]?.details?.file_path}
                     src={patientPhoto}
                     alt={`${fileDetails.name} photo`}
                   />
@@ -65,8 +66,7 @@ export const PatientDetailsPage = () => {
                       <div className="flex items-center text-blue-900">
                         <CiPhone size={20} className="mr-1" />
                         <label className="text-gray-500 text-xs font-medium">
-                          {fileDetails?.files?.[0]?.emergency_contact_1} (Juan,
-                          Amigo)
+                          {fileDetails?.files?.[0]?.emergency_contact_1}
                         </label>
                       </div>
                     )}
@@ -74,8 +74,7 @@ export const PatientDetailsPage = () => {
                       <div className="flex items-center text-blue-900">
                         <CiPhone size={20} className="mr-1" />
                         <label className="text-gray-500 text-xs font-medium">
-                          {fileDetails?.files?.[0]?.emergency_contact_2} (Jorge,
-                          Amigo)
+                          {fileDetails?.files?.[0]?.emergency_contact_2}
                         </label>
                       </div>
                     )}
@@ -93,71 +92,43 @@ export const PatientDetailsPage = () => {
                 </div>
               </div>
               <div className="my-4 space-y-4">
-                <div className="flex items-center space-x-3">
-                  <CiImageOn size={30} className="text-green-500" />
-                  <p className="text-black text-sm font-medium">
-                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
-                    <label className="text-xs text-gray-500">
-                      {" "}
-                      Subido el: 27/12/2021
-                    </label>
-                  </p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CiImageOn size={30} className="text-green-500" />
-                  <p className="text-black text-sm font-medium">
-                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
-                    <label className="text-xs text-gray-500">
-                      {" "}
-                      Subido el: 27/12/2021{" "}
-                    </label>
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <CiFileOn size={30} className="text-red-500" />
-                  <p className="text-black text-sm font-medium">
-                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
-                    <label className="text-xs text-gray-500">
-                      {" "}
-                      Subido el: 27/12/2021
-                    </label>
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <CiImageOn size={30} className="text-green-500" />
-                  <p className="text-black text-sm font-medium">
-                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
-                    <label className="text-xs text-gray-500">
-                      {" "}
-                      Subido el: 27/12/2021{" "}
-                    </label>
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <CiImageOn size={30} className="text-green-500" />
-                  <p className="text-black text-sm font-medium">
-                    Escanéo Ovarico, 25 Nov, 2.7 MB <br />
-                    <label className="text-xs text-gray-500">
-                      {" "}
-                      Subido el: 27/12/2021{" "}
-                    </label>
-                  </p>
-                </div>
-
-                <div className="flex justify-start items-center space-x-3">
-                  <button className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300">
-                    Subir archivo
-                  </button>
-                  <Link
-                    href={`/patients/patient/lab_results/${id}`}
-                    className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
-                  >
-                    Ver todos
-                  </Link>
-                </div>
+                {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results
+                  .length === 0 && <NoData />}
+                {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results.map(
+                  (result: any, index: number) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      {result.file_extension === ".pdf" ? (
+                        <CiFileOn size={30} className="text-red-500" />
+                      ) : (
+                        <CiImageOn size={30} className="text-green-500" />
+                      )}
+                      <p className="text-black text-sm font-medium">
+                        {result.file_path.split("/").pop()},{" "}
+                        <label className="text-xs text-gray-500">
+                          Tamaño: {result.file_size}
+                        </label>
+                        <br />
+                        <label className="text-xs text-gray-500">
+                          Subido el: {result.created_at}
+                        </label>
+                      </p>
+                    </div>
+                  )
+                )}
+                {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results
+                  .length > 0 && (
+                  <div className="flex justify-start items-center space-x-3">
+                    <button className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300">
+                      Subir archivo
+                    </button>
+                    <Link
+                      href={`/patients/patient/lab_results/${id}`}
+                      className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
+                    >
+                      Ver todos
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
