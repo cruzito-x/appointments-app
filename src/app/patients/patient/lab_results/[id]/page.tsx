@@ -31,7 +31,7 @@ const LabResultsByPatient = () => {
           </h1>
           <label className="text-gray-600 text-sm font-normal">
             Paciente: {fileDetails?.name} <br />
-            Expediente: #{String(fileDetails?.id).padStart(9, "0")}
+            Ficha: #{String(fileDetails?.id).padStart(9, "0")}
           </label>
         </div>
         <div className="my-4 space-y-4">

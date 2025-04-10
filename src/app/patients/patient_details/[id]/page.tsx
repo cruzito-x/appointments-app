@@ -58,7 +58,7 @@ export const PatientDetailsPage = () => {
                   <h1 className="text-black text-xl font-bold">
                     {fileDetails.name} <br />
                     <label className="text-xs text-gray-500 font-medium">
-                      Expediente: #{String(fileDetails.id).padStart(9, "0")}
+                      Ficha: #{String(fileDetails.id).padStart(9, "0")}
                     </label>
                   </h1>
                 </div>
