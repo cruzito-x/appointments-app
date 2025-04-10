@@ -17,20 +17,25 @@ import {
 import patientPhoto from "@/assets/images/paciente1.png";
 import Link from "next/link";
 import NoData from "@/components/results/noData/NoData";
+import { Uploader } from "rsuite";
+import "rsuite/dist/rsuite-no-reset.min.css";
+import { useState } from "react";
 
 export const PatientDetailsPage = () => {
   const pathname = usePathname();
   const id = parseInt(pathname.split("/").pop());
   const fileDetails = useFileDetails(id);
+  const [upload, setUpload] = useState(false);
 
   return (
     <>
       <Breadcrumbs
         icon={<></>}
         home="Pacientes"
-        title="Listado de Pacientes"
-        titleLink="/patients"
-        subtitle="Detalles de Paciente"
+        first_title="Listado de Pacientes"
+        first_title_link="/patients"
+        second_title="Detalles de Paciente"
+        second_title_link="#"
       />
       <div className="m-2 p-3.5 bg-white rounded-md h-auto">
         <div>
@@ -51,7 +56,10 @@ export const PatientDetailsPage = () => {
                     alt={`${fileDetails.name} photo`}
                   />
                   <h1 className="text-black text-xl font-bold">
-                    {fileDetails.name}
+                    {fileDetails.name} <br />
+                    <label className="text-xs text-gray-500 font-medium">
+                      Expediente: #{String(fileDetails.id).padStart(9, "0")}
+                    </label>
                   </h1>
                 </div>
               </div>
@@ -66,7 +74,8 @@ export const PatientDetailsPage = () => {
                       <div className="flex items-center text-blue-900">
                         <CiPhone size={20} className="mr-1" />
                         <label className="text-gray-500 text-xs font-medium">
-                          {fileDetails?.files?.[0]?.emergency_contact_1}
+                          {fileDetails?.files?.[0]?.emergency_contact_1} |
+                          Contacto de emergencia
                         </label>
                       </div>
                     )}
@@ -74,7 +83,8 @@ export const PatientDetailsPage = () => {
                       <div className="flex items-center text-blue-900">
                         <CiPhone size={20} className="mr-1" />
                         <label className="text-gray-500 text-xs font-medium">
-                          {fileDetails?.files?.[0]?.emergency_contact_2}
+                          {fileDetails?.files?.[0]?.emergency_contact_2} |
+                          Contacto de emergencia
                         </label>
                       </div>
                     )}
@@ -94,8 +104,9 @@ export const PatientDetailsPage = () => {
               <div className="my-4 space-y-4">
                 {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results
                   .length === 0 && <NoData />}
-                {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results.map(
-                  (result: any, index: number) => (
+                {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results
+                  .slice(0, 5)
+                  .map((result: any, index: number) => (
                     <div key={index} className="flex items-center space-x-3">
                       {result.file_extension === ".pdf" ? (
                         <CiFileOn size={30} className="text-red-500" />
@@ -113,21 +124,56 @@ export const PatientDetailsPage = () => {
                         </label>
                       </p>
                     </div>
-                  )
-                )}
+                  ))}
                 {fileDetails?.files?.[0]?.details?.[0]?.latest_lab_results
                   .length > 0 && (
-                  <div className="flex justify-start items-center space-x-3">
-                    <button className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300">
-                      Subir archivo
-                    </button>
-                    <Link
-                      href={`/patients/patient/lab_results/${id}`}
-                      className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
-                    >
-                      Ver todos
-                    </Link>
-                  </div>
+                  <>
+                    <div className="flex justify-start items-center space-x-3">
+                      <button
+                        className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
+                        onClick={() => setUpload(true)}
+                      >
+                        Nuevo archivo
+                      </button>
+                      <Link
+                        href={`/patients/patient/lab_results/${id}`}
+                        className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
+                      >
+                        Ver todos
+                      </Link>
+                    </div>
+                    <div className={`${upload ? "visible" : "hidden"}`}>
+                      <Uploader className="cursor-pointer" action="" draggable>
+                        <div
+                          style={{
+                            height: 150,
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <span>
+                            Haz clic o arrastra tus archivos aquí para subirlos
+                          </span>
+                        </div>
+                      </Uploader>
+                      <div className="flex justify-start items-center space-x-3">
+                        <button
+                          type="submit"
+                          className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
+                        >
+                          Subir archivo
+                        </button>
+                        <button
+                          className="mt-1 border-2 border-blue-900 text-blue-900 rounded px-4 py-2 inline-block font-semibold hover:bg-blue-900 hover:text-white transition duration-300"
+                          onClick={() => setUpload(false)}
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
             </div>

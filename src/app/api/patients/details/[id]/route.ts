@@ -48,7 +48,6 @@ export async function GET(req: any, { params }: any) {
       orderBy: {
         created_at: "desc",
       },
-      take: 5,
     });
 
     moment.locale("es");

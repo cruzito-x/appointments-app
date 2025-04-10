@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { CiMedicalCross } from "react-icons/ci";
 
 const Breadcrumbs = ({
-  icon,
+  icon = <></>,
   home = "",
-  title = "",
-  titleLink = "",
-  subtitle = "",
+  first_title = "",
+  first_title_link = "",
+  second_title = "",
+  second_title_link = "",
+  third_title = "",
 }) => {
   return (
     <>
@@ -21,7 +22,7 @@ const Breadcrumbs = ({
               {home}
             </a>
           </li>
-          {title && (
+          {first_title && (
             <li>
               <div className="flex items-center">
                 <svg
@@ -40,15 +41,42 @@ const Breadcrumbs = ({
                   />
                 </svg>
                 <Link
-                  href={titleLink}
+                  href={first_title_link}
                   className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-700"
                 >
-                  {title}
+                  {first_title}
                 </Link>
               </div>
             </li>
           )}
-          {subtitle && (
+          {second_title && (
+            <li aria-current="page">
+              <div className="flex items-center">
+                <svg
+                  className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 9 4-4-4-4"
+                  />
+                </svg>
+                <Link
+                  href={second_title_link}
+                  className="ms-1 text-sm font-medium text-gray-500 md:ms-2 hover:text-blue-500"
+                >
+                  {second_title}
+                </Link>
+              </div>
+            </li>
+          )}
+          {third_title && (
             <li aria-current="page">
               <div className="flex items-center">
                 <svg
@@ -67,7 +95,7 @@ const Breadcrumbs = ({
                   />
                 </svg>
                 <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 hover:text-blue-500">
-                  {subtitle}
+                  {third_title}
                 </span>
               </div>
             </li>

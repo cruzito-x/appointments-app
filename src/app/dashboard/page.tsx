@@ -16,7 +16,6 @@ import Personal from "@/components/cards/dashboard/Personal";
 import Reviews from "@/components/cards/dashboard/Reviews";
 import HorizontalBarChart from "@/components/charts/dashboard/HorizontalBarChart";
 import PieChart from "@/components/charts/dashboard/PieChart";
-import Breadcrumbs from "@/components/breadcrumbs/Breadcrumbs";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
